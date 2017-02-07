@@ -1,0 +1,6 @@
+$ git log
+commit 6f4527aea279a0ec5a508b1ecbd41a5db587ad70
+Author: MEthoD112 <mileshko.vitaly@gmail.com>
+Date:   Tue Feb 7 11:46:20 2017 +0300
+
+    Add status #2
