@@ -48,10 +48,6 @@ article li {
     width:46%;
     margin:20px 10px;
 }
-article li img {
-    float:left;
-    padding:7px;
-}
 article li h2 {
     font-size:24px;
     margin:0px;
@@ -68,7 +64,7 @@ article li button {
     background: #ffffff;
     border-radius: 10px;
     margin-right:20px;
-    width:100px;
+    width:80px;
     margin-bottom:10px;
 }
 article button{
@@ -78,17 +74,18 @@ article button{
     border-radius: 10px;
 }
 footer div {
-    margin-left:150px;
+    margin-left:20px;
     padding-top:0px;
     width:320px;
     display: inline-block;
 }
 footer span {
-    padding-left:80px;
+    padding-left:20px;
 }
 .icons {
-    text-align: right;
-    margin-left: 70px;
+    width:200px;
+    margin-right: 20px;
+    float:right;
 }           
 .icons__link .fa {
     font-size:40px;

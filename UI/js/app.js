@@ -115,7 +115,7 @@ var articles = [
     id: '15',
     title: 'Убийство брата Ким Чен Ина.',
     summary: 'Корейские СМИ: убийцы старшего брата Ким Чен Ына бежали через Россию',
-    createdAt: new Date('2017-02-17T17:00:00'),
+    createdAt: new Date('2016-02-17T17:00:00'),
     author: 'Сидоров Сидр',
     content: ' По данным южнокорейских СМИ, предполагаемые убийцы брата диктатора скрылись через Москву и Владивосток, при этом российская сторона отказалась их задерживать, несмотря на просьбу корейских коллег.'
    },
@@ -161,10 +161,88 @@ var articles = [
    },
 ];
 
+let article = {
+    id: '21',
+    title: 'Падение самолета в Калифорнии',
+    summary: 'В Калифорнии легкий самолет упал на жилые дома. Есть жертвы.',
+    createdAt: new Date('2017-02-26T12:12:00'),
+    author: 'Петров Петр',
+    content: 'Четыре человека погибли, еще два получили ранения в понедельник после того, как небольшой самолет упал на жилые дома в американском городе Риверсайд (штат Калифорния).'
+   };
+
 function getArticles(skip,top,filterConfig){
     skip = skip || 0;
-    top = top || 0;
+    top = top || 10;
+    let arr = [];
+    articles.sort(function(a, b) {
+        if (a.createdAt > b.createdAt) return 1;
+        if (a.createdAt < b.createdAt) return -1;
+    });
 
+    if (filterConfig){
+        arr = articles.filter(function(item,i,arr){
+            return item.author === filterConfig.author;
+        })
+        return arr.splice(skip,top);
+    }
     return articles.splice(skip,top);
+}
 
+function getArticle(id){
+    for (let i = 0; i < articles.length; i++){
+        if (articles[i].id === id){
+             return articles[i];
+        }
+    }
+}
+
+function validateArticle(article){
+    if (typeof article !== 'object'){
+        return false;
+    }
+    for (let i = 0; i < articles.length; i++){
+         if (articles[i].id === article.id){
+             return false;
+         }
+    }
+    if (typeof article.id === 'string' && 
+        typeof article.title === 'string' &&
+        typeof article.summary === 'string' &&
+        typeof article.author === 'string'  &&
+        typeof article.content === 'string' &&
+        (article.createdAt instanceof Date)){
+        return true;
+    }
+
+    return false;
+}
+
+function addArticle(article){
+    if (validateArticle(article)){
+         articles.push(article);
+         return true;
+    }
+    return false;
+}
+
+function editArticle(id,article){
+    for (let i = 0; i < articles.length; i++){
+        if (articles[i].id === id){
+             article.title ? articles[i].title = article.title: article.title;
+             article.summary ? articles[i].summary = article.summary: artilce.summary;
+             article.content ? articles[i].content = article.content: article.content;
+             return true;
+        }
+    }
+    return false;
+}
+
+function removeArticle(id){
+    for (let i = 0; i < articles.length; i++){
+        if (articles[i].id === id){
+            articles.splice(i,1);
+            return true;
+        }
+    }
+    return false;
 }
