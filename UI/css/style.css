@@ -42,7 +42,7 @@ article {
     text-align: center;
 }
 article li {
-    border:1px solid grey;
+    border:1px solid #222222;
     box-shadow:2px 2px 2px;
     display:inline-block;
     width:46%;
