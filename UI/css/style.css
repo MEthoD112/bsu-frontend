@@ -1,5 +1,10 @@
+html {
+    height: 100%;
+}
 body {
+    position: relative;
     max-width: 1440px;
+    min-height: 100%;
     margin:0 auto;
     background: #ffffff;
     font-family: 'Roboto', sans-serif;
@@ -12,7 +17,7 @@ header img {
     padding:20px 0px 20px 20px;
     float:left;
 }
-header ul {
+header span {
     float:right;
     color:#ffffff;
     background: #7c88ce;
@@ -37,41 +42,63 @@ nav button {
     border-radius: 10px;
     font-size: 24px;
     margin-right:20px;
+    display: none;
 }
 article {
     text-align: center;
+    padding-bottom: 120px;
 }
-article li {
+#article li {
     border:1px solid #222222;
     box-shadow:2px 2px 2px;
     display:inline-block;
     width:46%;
     margin:20px 10px;
+    vertical-align: top;
 }
-article li h2 {
+#article li h2 {
     font-size:24px;
     margin:0px;
     padding:10px 0px 15px 10px;
 }
-article li p {
+#article li p {
     margin:0px 0px 25px;
     font-size:16px;
     padding: 0px 8px;
     text-align: left;
 }
-article li button {
-    color: #7c88ce;
-    background: #ffffff;
+#article li span {
+    display: inline-block;
+    color: #ffffff;
+    background: #7c88ce;
     border-radius: 10px;
-    margin-right:20px;
-    width:80px;
+    margin-right:10px;
+    width:200px;
     margin-bottom:10px;
 }
-article button{
+#article li button {
+    display: inline-block;
+    color: #ffffff;
+    background: #7c88ce;
+    border-radius: 10px;
+    margin-right:10px;
+    width:200px;
+    margin-bottom:10px;
+}
+#article button{
     text-align: center;
     color: #ffffff;
     background: #7c88ce;
     border-radius: 10px;
+}
+#article li .edit,#article li .delete {
+    display: none;
+}
+footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 footer div {
     margin-left:20px;
