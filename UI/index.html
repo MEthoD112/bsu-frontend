@@ -2,42 +2,43 @@
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <!--switch Internet Explorer to the last version mode-->
     <meta charset="utf-8">
-    <!--Specify the encoding of the document-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--give the site an opportunity to be adaptive-->
     <title>News Portal</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Roboto" rel="stylesheet">
-    <!--Connect fonts-->
     <link rel="stylesheet" href="css/font-awesome.min.css">
-    
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
     <header>
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
-        <span id="signup">SignUp/SignIn</span>
+        <a id="signup" href="#login">SignUp/SignIn</a>
         <p>“I cannot tell a lie.” —George Washington </p>
         <hr>
     </header>
     <nav>
-        <button id="addnew">Add New</button>
-        <button id="addtag">Add Tag</button>
+        <a href="#new" id="addnew">Add New</a>
+        <a href="#tag" id="addtag">Add Tag</a>
+
         <select id="filterauthor">
-            <option selected="selected">Filter by Author</option>
+            <option selected="selected">No filter by author</option>
             
         </select>
-        <select id="filtertag">
-            <option selected="selected">Filter by Tag</option>
-            
+
+        <button id="applayauthor">Apply</button>
+
+        <select id="filtertag" multiple="multiple">
+            <option selected="selected">No filter</option>
         </select>
-        <!--<select>Filter by Date</select> -->
+
+        <button id="applaytag">Apply</button>
+
+        <input id="startdate" type="date">
+        <input id="enddate" type="date">
+
+        <button id="applaydate">Apply</button>
+
         <hr>
     </nav>
     <article>
@@ -46,6 +47,91 @@
         </ul>
         
     </article>
+    <div id="login" class="modalDialog">
+        <div class="login-box">
+            <a href="#close" title="Close" class="close">X</a>
+            <span class='logintext'>Your login</span>
+            <input class="loginfield" id="sign" type="text" placeholder="Insert your login here">
+            <span class="pwd">Your password</span>
+            <input class="inppwd" type="text" placeholder="Insert your password here">
+            <button class="signbutton" id="signbutton">SignIn</button>
+            <button class="signoutbutton" id="signoutbutton">SignOut</button>
+        </div>
+    </div>
+    <div id="tag" class="modalDialog">
+        <div class="tag-box">
+            <a href="#close" title="Close" class="close">X</a>
+            <span class="tagtext">Insert tag</span>
+            <input class="tagfield" id="tagvalue" type="text" placeholder="Insert your tag here">
+            <button class="tagbutton" id="tagbutton">Add Tag</button>
+        </div>
+    </div>
+    <div id="new" class="modalDialog">
+        <div class="new-box">
+            <a href="#close" title="Close" class="close">X</a>
+            <div>Add your new</div>
+            <form action="">
+            <span class="insertid">Insert id</span>
+            <input class="newid" id="newid" type="text" value="Insert id of the new here">
+
+            <span class="inserttitle">Insert title</span>
+            <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here">
+
+            <span class="insertsummary">Insert short summary</span>
+            <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here">
+
+            <span class="insertcontent">Insert content of the new</span>
+            <textarea id="newcontent" type="text">Insert here the content of the new</textarea>
+
+            <span class="inserttags">Select tags</span>
+            <select id="selecttags" multiple="multiple">
+                
+            </select>
+            
+            <button id="newbutton">Add New</button>
+            </form>
+        </div>
+    </div>
+    <div id="readnew" class="modalDialog">
+        <div class="readnew-box">
+            <a href="#close" title="Close" class="close">X</a>
+            <h2 class="newtitle"></h2>
+            <p class="newcontent"></p>
+            <span class="newauthor"></span>
+            <span class="newdate"></span>
+            <span class="newtags"></span>
+        </div>
+    </div>
+    <div id="editnew" class="modalDialog">
+            <div class="new-box">
+                <a href="#close" title="Close" class="close">X</a>
+
+                <div>Edit new</div>
+
+                <form action="">
+
+                <span class="insertid">Change id</span>
+                <input class="editid" id="editid" type="text">
+
+                <span class="inserttitle">Change title</span>
+                <input class="edittitle" id="edittitle" type="text"">
+
+                <span class="insertsummary">Change short summary</span>
+                <input class="editsummary" id="editsummary" type="text">
+
+                <span class="insertcontent">Change content of the new</span>
+                <textarea id="editcontent" type="text"></textarea>
+
+                <span class="inserttags">Change tags</span>
+                <span class="tagsvalue"></span>
+                <select id="selecttags" multiple="multiple">
+                    
+                </select>
+                
+                <button id="editbutton">Edit New</button>
+                </form>
+            </div>
+    </div>
     <footer>
         <hr>
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">

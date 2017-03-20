@@ -17,14 +17,14 @@ header img {
     padding:20px 0px 20px 20px;
     float:left;
 }
-header span {
+header a {
     float:right;
     color:#ffffff;
     background: #7c88ce;
     border-radius:10px;
     margin:40px 20px 20px 0px;
     padding:5px 7px;
-    
+    text-decoration: none;
 }
 header p {
     margin:40px 0px 30px 15%;
@@ -36,13 +36,236 @@ header p {
 nav{
     text-align: center;
 }
-nav button {
+body nav button,nav a {
+    display: inline-block;
     background: #7c88ce;
     color: #ffffff;
     border-radius: 10px;
     font-size: 24px;
     margin-right:20px;
+    width: 105px;
+}
+body nav a {
     display: none;
+    text-decoration: none;
+}
+
+
+
+.modalDialog {
+    position: fixed;
+    font-family: Arial, Helvetica, sans-serif;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99999;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    display: none;
+    width: 100%;
+    min-width: 320px;
+    pointer-events: none;
+}
+.modalDialog:target {
+    display: block;
+    pointer-events: auto;
+}
+
+
+
+.login-box, .tag-box {
+    width: 300px;
+    height: 300px;
+    position: relative;
+    margin: 13% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+}
+.new-box {
+    width: 600px;
+    height: 820px;
+    position: relative;
+    margin: 1% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+}
+.new-box div {
+    text-align: center;
+}
+.readnew-box {
+    width: 700px;
+    height: 620px;
+    position: relative;
+    margin: 1% auto;
+    padding: 5px 20px 13px 20px;
+    border-radius: 10px;
+    background: #fff;
+    background: -moz-linear-gradient(#fff, #999);
+    background: -webkit-linear-gradient(#fff, #999);
+    background: -o-linear-gradient(#fff, #999);
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: .2;
+}
+
+
+
+.modalDialog .logintext, .modalDialog .tagtext {
+    position: absolute;
+    left:126px;
+    top:20px;
+}
+.modalDialog .pwd {
+    position: absolute;
+    left:110px;
+    top:120px;
+}
+.modalDialog .loginfield, .modalDialog .tagfield {
+    position: absolute;
+    left:46px;
+    top:59px;
+}
+.modalDialog .inppwd {
+    position: absolute;
+    left:46px;
+    top:160px;
+}
+.modalDialog .signoutbutton {
+    position: absolute;
+    top:230px;
+    left:170px;
+}
+.modalDialog .signbutton {
+    position: absolute;
+    top:230px;
+    left:80px;
+}
+
+
+
+.modalDialog .tagbutton {
+    position: absolute;
+    left:126px;
+    top:230px;
+}
+
+
+
+.modalDialog .insertid,.modalDialog .insertid {
+    position: absolute;
+    top:35px;
+    left:100px;
+}
+
+
+.newid,.editid {
+    position: absolute;
+    top:60px;
+    left:100px;
+}
+
+.modalDialog .inserttitle,.modalDialog .inserttitle {
+    position: absolute;
+    top:95px;
+    left:100px;
+}
+
+.newtitle,.edittitle {
+    position: absolute;
+    top:120px;
+    left:100px;
+    width: 400px;
+}
+
+.modalDialog .insertsummary, .modalDialog .insertsummary {
+    position: absolute;
+    top:155px;
+    left:100px;
+}
+
+.newsummary,.editsummary {
+    position: absolute;
+    top:185px;
+    left:100px;
+    width: 400px;
+}
+.modalDialog .insertcontent,.modalDialog .insertcontent {
+    position: absolute;
+    top:224px;
+    left:100px;
+}
+#newcontent,#editcontent {
+    position: absolute;
+    top:260px;
+    left:100px;
+    width: 400px;
+    height: 240px;
+}
+.modalDialog .inserttags,.modalDialog .inserttags {
+    position: absolute;
+    top:553px;
+    left:251px;
+}
+#selecttags {
+    position: absolute;
+    top:585px;
+    left:202px;
+    width: 190px;
+    height: 200px;
+}
+#newbutton,#editbutton {
+    position: absolute;
+    top:790px;
+    left:258px;
+}
+.modalDialog .new-box .tagsvalue {
+    position: absolute;
+    top: 523px;
+    left: 199px;
+}
+.readnew-box .newtitle{
+    position: absolute;
+    top:0px;
+    left:40px;
+}
+.readnew-box .newcontent{
+    position: absolute;
+    top:80px;
+    left:15px;
+}
+.readnew-box .newauthor{
+    position: absolute;
+    top:220px;
+    left:15px;
+}
+.readnew-box .newdate{
+    position: absolute;
+    top:270px;
+    left:15px;
+}
+.readnew-box .newtags{
+    position: absolute;
+    top:310px;
+    left:15px;
 }
 article {
     text-align: center;
@@ -76,7 +299,7 @@ article {
     width:200px;
     margin-bottom:10px;
 }
-#article li button {
+#article li button,#article li a {
     display: inline-block;
     color: #ffffff;
     background: #7c88ce;
@@ -84,6 +307,7 @@ article {
     margin-right:10px;
     width:200px;
     margin-bottom:10px;
+    text-decoration: none;
 }
 #article button{
     text-align: center;
@@ -94,6 +318,8 @@ article {
 #article li .edit,#article li .delete {
     display: none;
 }
+
+
 footer {
     position: absolute;
     left: 0;

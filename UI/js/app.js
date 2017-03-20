@@ -196,7 +196,7 @@ let articlesService = (function () {
       
     function getArticles(skip,top,filterConfig){
         skip = skip || 0;
-        top = top || 10;
+        top = top || articles.length;
         let arr = [];
         articles.sort(function(a, b) {
             if (a.createdAt > b.createdAt) return 1;
@@ -211,9 +211,12 @@ let articlesService = (function () {
             }
 
             if (filterConfig.tags){
-                arr = articles.filter(function(item,i,arr){
-                    return item.tags.indexOf(filterConfig.tags[0]) !== -1;
-                })
+                for (let j = 0; j < filterConfig.tags.length; j++) {
+                    let arrNew = articles.filter(function(item){
+                        return (item.tags.indexOf(filterConfig.tags[j]) !== -1 && arr.indexOf(item) === -1);
+                    })
+                    arr = arr.concat(arrNew);
+                }
                 return arr.splice(skip,top);
             }
         }    
@@ -221,29 +224,28 @@ let articlesService = (function () {
     }
 
     function getArticle(id){
-        for (let i = 0; i < articles.length; i++){
-            if (articles[i].id === id){
-                 return articles[i];
+        let article;
+        articles.forEach(function(item){
+            if(item.id === id){
+                 article = item;
             }
-        }
+        })
+        return article;
     }
 
     function validateArticle(article){
         if (!article){
             return false;
         }
-        for (let i = 0; i < articles.length; i++){
-             if (articles[i].id === article.id){
-                 return false;
-             }
+        if(articles.some(function(item){ return item.id === article.id})){
+            return false;
         }
-        for (let i = 0; i < article.tags.length; i++){
-            if (tags.indexOf(article.tags[i]) === -1){
-                return false;
-            }
+        if(article.tags.every(function(item){return tags.indexOf(item) === -1})){
+            return false;
         }
-
+       
         if (typeof article.id === 'string' && 
+            !isNaN(+article.id) &&
             typeof article.title === 'string' &&
             typeof article.summary === 'string' &&
             typeof article.author === 'string'  &&
@@ -253,7 +255,6 @@ let articlesService = (function () {
             article.tags.length >= 1){
             return true;
         }
-
         return false;
     }
 
@@ -266,24 +267,25 @@ let articlesService = (function () {
     }
 
     function editArticle(id,article){
-        for (let i = 0; i < articles.length; i++){
-            if (articles[i].id === id){
-                 article.title ? articles[i].title = article.title: article.title;
-                 article.summary ? articles[i].summary = article.summary: article.summary;
-                 article.content ? articles[i].content = article.content: article.content;
-                 return true;
-            }
+
+        let artic = getArticle(id);
+
+        if (artic.id === id){
+            article.title ? artic.title = article.title: article.title;
+            article.summary ? artic.summary = article.summary: article.summary;
+            article.content ? artic.content = article.content: article.content;
+            return true;
         }
         return false;
     }
 
     function removeArticle(id){
-        for (let i = 0; i < articles.length; i++){
-            if (articles[i].id === id){
+        articles.forEach(function(item,i){
+            if (item.id === id){
                 articles.splice(i,1);
                 return true;
             }
-        }
+        })
         return false;
     }
 
@@ -291,11 +293,12 @@ let articlesService = (function () {
         if (tags.indexOf(tag) === -1){
             throw new Error('Unacceptable tag');
         }
-        for (let i = 0; i < articles.length; i++){
-            if (articles[i].id === id){
-                articles[i].tags.push(tag);
-                return true;
-            }
+
+        let art = getArticle(id);
+
+        if (art){
+            art.tags.push(tag);
+            return true;
         }
         return false;
     }
@@ -304,26 +307,41 @@ let articlesService = (function () {
         if (tags.indexOf(tag) === -1){
             throw new Error('Unacceptable tag');
         }
-        for (let i = 0; i < articles.length; i++){
-            if (articles[i].id === id && articles[i].tags.indexOf(tag) !== -1){
-                articles[i].tags.splice(articles[i].tags.indexOf(tag),1);
-                return true;
+
+        let arc = getArticle(id);
+        var bool = false;
+
+        arc.tags.forEach(function(item,i){
+            if (item === tag){
+                bool = true;
+                arc.tags.splice(i,1);
             }
-        }
-        return false;
+        })
+        return bool;
     }
 
     function getAuthors(){
         let arr = [];
-        for (let i = 0; i < articles.length; i++){
-            if (arr.indexOf(articles[i].author) === -1){
-                arr.push(articles[i].author)
+        articles.forEach(function(item,i){
+            if (arr.indexOf(item.author) === -1){
+                arr.push(item.author)
             }
-        }
+        })
         return arr;
     }
     function getTags(){
         return tags;
+    }
+    function sortArticlesByDate(start,end){
+        let articles = getArticles();
+        let arr = [];
+
+        articles.map(function(item){
+            if(start <= item.createdAt && end >= item.createdAt){
+                return arr.push(item);
+            }
+        })
+        return arr;
     }
 return {
     getArticles: getArticles,
@@ -335,11 +353,11 @@ return {
     addTag: addTag,
     removeTag: removeTag,
     getAuthors: getAuthors,
-    getTags: getTags
+    getTags: getTags,
+    sortArticlesByDate: sortArticlesByDate
     };
   
 }());
-
 
 let domService = (function () {
 
@@ -349,9 +367,9 @@ let domService = (function () {
     let addtag = document.getElementById('addtag');
     let filterauthor = document.getElementById('filterauthor');
     let filtertag = document.getElementById('filtertag');
-    let user = null;
-    var newEdit;
-    var newDel;
+    let selecttags = document.getElementById('selecttags');
+    let startdate = document.getElementById('startdate');
+    let enddate = document.getElementById('enddate');
 
     function displayNews(articles) {
 
@@ -363,9 +381,9 @@ let domService = (function () {
             let span = document.createElement('span');
             let span1 = span.cloneNode(true);
             let span2 = span.cloneNode(true);
-            let button = document.createElement('button')
-            let button1 = button.cloneNode(true);
-            let button2 = button.cloneNode(true);
+            let a = document.createElement('a');
+            let a1 = a.cloneNode(true);
+            let button = document.createElement('button');
 
             li.setAttribute('data-id',articles[i].id)
             h2.innerHTML = articles[i].title;
@@ -373,24 +391,27 @@ let domService = (function () {
             span.innerHTML = articles[i].createdAt.toDateString();
             span1.innerHTML = articles[i].author;
             span2.innerHTML = articles[i].tags;
-            button.innerHTML = 'Read';
-            button1.setAttribute('class','edit');
-            button1.innerHTML = 'Edit';
-            button2.setAttribute('class','delete');
-            button2.innerHTML = 'Delete';
+            a.innerHTML = 'Read';
+            a.href = '#readnew'
+            a1.setAttribute('class','edit ed');
+
+            a1.innerHTML = 'Edit';
+            a1.href = '#editnew';
+            button.setAttribute('class','delete del');
+
+            button.innerHTML = 'Delete';
 
             li.appendChild(h2);
             li.appendChild(p);
             li.appendChild(span);
             li.appendChild(span1);
             li.appendChild(span2);
+            li.appendChild(a);
+            li.appendChild(a1);
             li.appendChild(button);
-            li.appendChild(button1);
-            li.appendChild(button2);
             ul.appendChild(li);
         }
     }
-
     function addNew(article){
             let li = document.createElement('li');
             let h2 = document.createElement('h2');
@@ -398,9 +419,9 @@ let domService = (function () {
             let span = document.createElement('span');
             let span1 = span.cloneNode(true);
             let span2 = span.cloneNode(true);
-            let button = document.createElement('button')
-            let button1 = button.cloneNode(true);
-            let button2 = button.cloneNode(true);
+            let a = document.createElement('a');
+            let a1 = a.cloneNode(true);
+            let button = document.createElement('button');
 
             li.setAttribute('data-id',article.id)
             h2.innerHTML = article.title;
@@ -408,32 +429,78 @@ let domService = (function () {
             span.innerHTML = article.createdAt.toDateString();
             span1.innerHTML = article.author;
             span2.innerHTML = article.tags;
-            button.innerHTML = 'Read';
-            button1.setAttribute('class','edit');
-            button1.innerHTML = 'Edit';
-            button2.setAttribute('class','delete');
-            button2.innerHTML = 'Delete';
+
+            a.innerHTML = 'Read';
+            a.href = '#readnew'
+            a1.setAttribute('class','ed');
+            a1.innerHTML = 'Edit';
+            a1.href = '#editnew';
+
+            button.setAttribute('class','del');
+            button.innerHTML = 'Delete';
 
             li.appendChild(h2);
             li.appendChild(p);
             li.appendChild(span);
             li.appendChild(span1);
             li.appendChild(span2);
+            li.appendChild(a);
+            li.appendChild(a1);
             li.appendChild(button);
-            li.appendChild(button1);
-            li.appendChild(button2);
             ul.appendChild(li); 
     }
-
-    function removeNew(id){
-        let li = ul.getElementsByTagName('li');
-        for (let i = 0; i < li.length; i++) {
-            if (li[i].getAttribute('data-id') === id){
-                ul.removeChild(li[i]);
-            }
+    function removeNew(){
+        if (event.target.tagName !== 'BUTTON') {
+           return;
         }
+        let articleNodeToDelete = event.target.parentElement;
+        let id = articleNodeToDelete.getAttribute('data-id');
+        articlesService.removeArticle(id);
+        ul.removeChild(articleNodeToDelete);
     }
+    function readNew() {
+        if (event.target.innerHTML !== 'Read') {
+           return;
+        }
+        let articleNode = event.target.parentElement;
+        let id = articleNode.getAttribute('data-id');
 
+        let article = articlesService.getArticle(id);
+
+        let h2 = document.getElementsByClassName('newtitle')[0];
+        let p = document.getElementsByClassName('newcontent')[0];
+        let author = document.getElementsByClassName('newauthor')[0];
+        let date = document.getElementsByClassName('newdate')[0];
+        let tags = document.getElementsByClassName('newtags')[0];
+
+        h2.innerHTML = article.title;
+        p.innerHTML = article.content;
+        author.innerHTML = article.author;
+        date.innerHTML = article.createdAt;
+        tags.innerHTML = article.tags.join(',');
+    }
+    function showEditNew(){
+        if (event.target.innerHTML !== 'Edit') {
+           return;
+        }
+        let articleNode = event.target.parentElement;
+        let id = articleNode.getAttribute('data-id');
+        let article = articlesService.getArticle(id);
+
+        let editid = document.getElementById('editid');
+        let edittitle = document.getElementById('edittitle');
+        let editsummary = document.getElementById('editsummary');
+        let editcontent = document.getElementById('editcontent');
+        let tagsvalue = document.getElementsByClassName('tagsvalue')[0];
+
+        editid.value = article.id;
+        edittitle.value = article.title;
+        editsummary.value = article.summary;
+        editcontent.value = article.content;
+        tagsvalue.innerHTML = article.tags.join(',');
+
+
+    }
     function editNew(id,article){
         let li = ul.getElementsByTagName('li');
         for (let i = 0; i < li.length; i++) {
@@ -449,25 +516,24 @@ let domService = (function () {
             }
         }
     }
-    
-    function showUserItems() {
-        var edit = ul.getElementsByClassName('edit');
-        var del = ul.getElementsByClassName('delete');
-        if (user){
-            newEdit = Array.prototype.slice.call(edit);
-            newDel = Array.prototype.slice.call(del);
+    function showUserItems(user) {
+        var edit = ul.getElementsByClassName('ed');
+        var del = ul.getElementsByClassName('del');
 
+        var newEdit = Array.prototype.slice.call(edit);
+        var newDel = Array.prototype.slice.call(del);
+
+        if (user){
+            
             signup.innerHTML = user;
             addnew.style.display = 'inline-block';
             addtag.style.display = 'inline-block';
            
-            for (let i = 0; i < edit.length; i++) {
-                edit[i].removeAttribute('class');
-                i--;
+            for (let i = 0; i < newEdit.length; i++) {
+                newEdit[i].classList.remove("edit");
             }
-            for (let j = 0; j < del.length; j++) {
-                del[j].removeAttribute('class');
-                j--;
+            for (let j = 0; j < newDel.length; j++) {
+                newDel[j].classList.remove("delete");
             } 
         }    
         if (!user){
@@ -478,31 +544,74 @@ let domService = (function () {
             addtag.style.display = 'none';
 
             for (let i = 0; i < newEdit.length; i++) {
-                newEdit[i].setAttribute('class','edit');
+                newEdit[i].classList.add("edit");
             }
             for (let j = 0; j < newDel.length; j++) {
-                newDel[j].setAttribute('class','delete');
+                newDel[j].classList.add("delete");
             } 
         }
     }
-
     function showFilterAuthor(){
-        let arr = getAuthors();
-        for (var i = 0; i < arr.length; i++) {
+        let opt = filterauthor.getElementsByTagName('option');
+        var newOpt = Array.prototype.slice.call(opt);
+
+        for (let i = 1; i < newOpt.length; i++) {
+            filterauthor.removeChild(newOpt[i]);  
+        }
+
+        let arr = articlesService.getAuthors();
+
+        for (let i = 0; i < arr.length; i++) {
             let option = document.createElement('option');
             option.innerHTML = arr[i];
             filterauthor.appendChild(option);
         }
     }
-
     function showFilterTag(){
-        let arr = getTags();
+        let arr = articlesService.getTags();
+
         for (var i = 0; i < arr.length; i++) {
             let option = document.createElement('option');
             option.innerHTML = arr[i];
             filtertag.appendChild(option);
         }
-    }     
+        for (var i = 0; i < arr.length; i++) {
+            let option = document.createElement('option');
+            option.innerHTML = arr[i];
+            selecttags.appendChild(option);
+        }
+    }   
+    function getFilterAuthor() {
+        var selectedAuthor = filterauthor.value;
+        return selectedAuthor;
+    } 
+    function getFilterTags(){
+        let tags = getSelection(filtertag);
+        return tags;
+    }
+    function getFilterDates() {
+        let start = startdate.value;
+        let end = enddate.value;
+        let arr = [];
+        arr[0] = Date.parse(start);
+        arr[1] = Date.parse(end);
+        return  arr;
+    }
+    function clearNews() {
+        let li = ul.getElementsByTagName('li');
+        let newLi = Array.prototype.slice.call(li);
+        for (let i = 0; i < newLi.length; i++) {
+            ul.removeChild(newLi[i]);  
+        }
+    } 
+    function getSelection(o){
+        if (!o.options) return [];
+        var selectedOptions = [];
+        for (var i = 0; i < o.options.length; i++) 
+            if (o.options[i].selected) 
+                selectedOptions.push(o.options[i].value);
+        return selectedOptions;
+    }
     return {
         displayNews: displayNews,
         addNew: addNew,
@@ -510,7 +619,14 @@ let domService = (function () {
         editNew: editNew,
         showUserItems: showUserItems,
         showFilterAuthor: showFilterAuthor,
-        showFilterTag: showFilterTag
+        showFilterTag: showFilterTag,
+        getFilterAuthor: getFilterAuthor,
+        clearNews: clearNews,
+        getSelection: getSelection,
+        getFilterTags: getFilterTags,
+        getFilterDates: getFilterDates,
+        readNew: readNew,
+        showEditNew: showEditNew
         };
   
 }());   
@@ -524,26 +640,149 @@ let article = {
         content: 'Четыре человека погибли, еще два получили ранения в понедельник после того, как небольшой самолет упал на жилые дома в американском городе Риверсайд (штат Калифорния).',
         tags: ['accident']
        };
+let user = 'Vasya Pupkin';
 
-function addArticle(article) {
-    if (articlesService.addArticle(article)){
-        domService.addNew(article);
-    }
+let button = document.getElementById('signbutton');
+button.addEventListener("click",signUser);
+let buttonsignout = document.getElementById('signoutbutton');
+buttonsignout.addEventListener("click",signOut);
+
+let buttontag = document.getElementById('tagbutton');
+buttontag.addEventListener("click",addTag);
+
+let buttonnew = document.getElementById('newbutton');
+buttonnew.addEventListener("click",addNew);
+
+let applayauthor = document.getElementById('applayauthor');
+applayauthor.addEventListener("click",filterAuthor);
+
+let applaytag = document.getElementById('applaytag');
+applaytag.addEventListener("click",filterTags);
+
+let applaydate = document.getElementById('applaydate');
+applaydate.addEventListener("click",filterDate);
+
+let articleId = document.getElementById('article');
+articleId.addEventListener("click",deleteNew);
+
+articleId.addEventListener("click",readNew);
+articleId.addEventListener("click",showEditNew);
+
+function signUser() {
+    let inputname = document.getElementById('sign');
+    user = inputname.value;
+    domService.showUserItems(user);
 }
-
+function signOut() {
+    user = null;
+    domService.showUserItems(user);
+}
 function getArticles(skip,top,filterConfig){
     domService.displayNews(articlesService.getArticles(skip,top,filterConfig));
-
 }
-
-function removeArticle(id) {
-    if (articlesService.removeArticle(id)){
-        domService.removeNew(id);
+function addTag() {
+    let inputtag = document.getElementById('tagvalue');
+    let tags = articlesService.getTags();
+    if (tags.indexOf(inputtag.value) !== -1){
+        alert('This tag is also exist');
+        return;
     }
-}
+    tags.push(inputtag.value);
+    alert('Tag adds succesfully');
 
+    let filtertag = document.getElementById('filtertag');
+    let selecttags = document.getElementById('selecttags');
+
+    let option = document.createElement('option');
+    let option1 = document.createElement('option');
+    option.innerHTML = inputtag.value;
+    option1.innerHTML = inputtag.value;
+    filtertag.appendChild(option);
+    selecttags.appendChild(option1);
+}
+function addNew() {
+    let id = document.getElementById('newid').value;
+    let title = document.getElementById('newtitle').value;
+    let summary = document.getElementById('newsummary').value;
+    let content = document.getElementById('newcontent').value;
+    let tags = document.getElementById('selecttags');
+
+    let article = {};
+    article.id = id;
+    article.title = title;
+    article.summary = summary;
+    article.content = content;
+    article.tags = domService.getSelection(tags);
+    article.createdAt = new Date();
+    article.author = user;
+
+    if (articlesService.validateArticle(article)){
+        articlesService.addArticle(article);
+        domService.addNew(article);
+        domService.showUserItems(user);
+        domService.showFilterAuthor();
+        return article;
+    }
+    alert('your article is not valid');
+}
+function deleteNew(){
+    domService.removeNew();
+}
+function readNew(){
+    domService.readNew();
+}
+function showEditNew() {
+    domService.showEditNew();
+}
+function filterAuthor() {
+    let author = domService.getFilterAuthor();
+    if (author === 'No filter by author'){
+        domService.clearNews();
+        domService.displayNews(articlesService.getArticles());
+        domService.showUserItems(user);
+        return;
+    }
+    let obj = {};
+    obj.author = author;
+    domService.clearNews();
+    domService.displayNews(articlesService.getArticles(0,10,obj));
+    domService.showUserItems(user);
+}
+function filterTags() {
+    let tags = domService.getFilterTags();
+    if (tags[0] === 'No filter'){
+        domService.clearNews();
+        domService.displayNews(articlesService.getArticles());
+        domService.showUserItems(user);
+        return;
+    }
+    domService.clearNews();
+    let obj = {};
+    obj.tags = tags;
+    domService.displayNews(articlesService.getArticles(0,10,obj));
+    domService.showUserItems(user);
+}
+function filterDate() {
+    let arr = domService.getFilterDates();
+    if (!arr[0] && !arr[1]){
+        alert('Choose the start or end date');
+        return;
+    }
+    arr[0] = arr[0] || 0;
+    arr[1] = arr[1] || Date.parse(new Date('2117-02-26T12:12:00'));
+
+    domService.clearNews();
+    domService.displayNews(articlesService.sortArticlesByDate(arr[0],arr[1]));
+    domService.showUserItems(user);
+}
 function editArticle(id,article) {
     if (articlesService.editArticle(id,article)){
         domService.editNew(id,article);
     }
 }
+
+document.addEventListener("DOMContentLoaded", domService);
+getArticles(0,10);
+domService.showFilterAuthor();
+domService.showFilterTag();
+domService.showUserItems(user);
