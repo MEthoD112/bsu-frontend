@@ -1,0 +1,26 @@
+{
+  "name": "vitaliy-mileshko",
+  "version": "1.0.0",
+  "description": "Collective news portal",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MEthoD112/bsu-frontend.git"
+  },
+  "keywords": [
+    "news",
+    "portal"
+  ],
+  "author": "Vitaliy Mileshko",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/MEthoD112/bsu-frontend/issues"
+  },
+  "homepage": "https://github.com/MEthoD112/bsu-frontend#readme",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}
