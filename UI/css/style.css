@@ -51,6 +51,72 @@ body nav a {
 }
 
 
+article {
+    text-align: center;
+    padding-bottom: 140px;
+}
+.article li {
+    border:1px solid #222222;
+    box-shadow:0px 0px 3px;
+    display:inline-block;
+    width:46%;
+    margin:20px 10px;
+    vertical-align: top;
+    box-sizing: border-box;
+}
+
+.article li h2 {
+    font-size:24px;
+    margin:0px;
+    padding:10px 0px 15px 10px;
+}
+.article li p {
+    margin:0px 0px 25px;
+    font-size:16px;
+    padding: 0px 8px;
+    text-align: left;
+}
+.article li span {
+    display: inline-block;
+    color: #ffffff;
+    background: #7c88ce;
+    border-radius: 10px;
+    margin-right:10px;
+    width:200px;
+    margin-bottom:10px;
+}
+.article li button,.article li a {
+    display: inline-block;
+    color: #ffffff;
+    background: #7c88ce;
+    border-radius: 10px;
+    margin-right:10px;
+    width:200px;
+    margin-bottom:10px;
+    text-decoration: none;
+}
+.article button{
+    text-align: center;
+    color: #ffffff;
+    background: #7c88ce;
+    border-radius: 10px;
+}
+.article li .edit,.article li .delete {
+    display: none;
+}
+
+.pagination {
+    display: inline-block;
+    margin: 0 auto;
+    color: #ffffff;
+    background: #7c88ce;
+    border-radius: 10px;
+    width:200px;
+    margin-bottom:10px;
+}
+.pagination-view {
+    display: none;
+}
 
 .modalDialog {
     position: fixed;
@@ -74,7 +140,6 @@ body nav a {
     display: block;
     pointer-events: auto;
 }
-
 
 
 .login-box, .tag-box {
@@ -128,7 +193,6 @@ body nav a {
 }
 
 
-
 .modalDialog .logintext, .modalDialog .tagtext {
     position: absolute;
     left:126px;
@@ -159,49 +223,37 @@ body nav a {
     top:230px;
     left:80px;
 }
-
-
-
 .modalDialog .tagbutton {
     position: absolute;
     left:126px;
     top:230px;
 }
-
-
-
 .modalDialog .insertid,.modalDialog .insertid {
     position: absolute;
     top:35px;
     left:100px;
 }
-
-
 .newid,.editid {
     position: absolute;
     top:60px;
     left:100px;
 }
-
 .modalDialog .inserttitle,.modalDialog .inserttitle {
     position: absolute;
     top:95px;
     left:100px;
 }
-
 .newtitle,.edittitle {
     position: absolute;
     top:120px;
     left:100px;
     width: 400px;
 }
-
 .modalDialog .insertsummary, .modalDialog .insertsummary {
     position: absolute;
     top:155px;
     left:100px;
 }
-
 .newsummary,.editsummary {
     position: absolute;
     top:185px;
@@ -213,7 +265,7 @@ body nav a {
     top:224px;
     left:100px;
 }
-#newcontent,#editcontent {
+.newcontent,.editcontent {
     position: absolute;
     top:260px;
     left:100px;
@@ -225,14 +277,14 @@ body nav a {
     top:553px;
     left:251px;
 }
-#selecttags {
+.selecttags {
     position: absolute;
     top:585px;
     left:202px;
     width: 190px;
     height: 200px;
 }
-#newbutton,#editbutton {
+.newbutton,.editbutton {
     position: absolute;
     top:790px;
     left:258px;
@@ -266,57 +318,6 @@ body nav a {
     position: absolute;
     top:310px;
     left:15px;
-}
-article {
-    text-align: center;
-    padding-bottom: 120px;
-}
-#article li {
-    border:1px solid #222222;
-    box-shadow:2px 2px 2px;
-    display:inline-block;
-    width:46%;
-    margin:20px 10px;
-    vertical-align: top;
-}
-#article li h2 {
-    font-size:24px;
-    margin:0px;
-    padding:10px 0px 15px 10px;
-}
-#article li p {
-    margin:0px 0px 25px;
-    font-size:16px;
-    padding: 0px 8px;
-    text-align: left;
-}
-#article li span {
-    display: inline-block;
-    color: #ffffff;
-    background: #7c88ce;
-    border-radius: 10px;
-    margin-right:10px;
-    width:200px;
-    margin-bottom:10px;
-}
-#article li button,#article li a {
-    display: inline-block;
-    color: #ffffff;
-    background: #7c88ce;
-    border-radius: 10px;
-    margin-right:10px;
-    width:200px;
-    margin-bottom:10px;
-    text-decoration: none;
-}
-#article button{
-    text-align: center;
-    color: #ffffff;
-    background: #7c88ce;
-    border-radius: 10px;
-}
-#article li .edit,#article li .delete {
-    display: none;
 }
 
 

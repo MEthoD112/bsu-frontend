@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
+
     <header>
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
         <a id="signup" href="#login">SignUp/SignIn</a>
         <p>“I cannot tell a lie.” —George Washington </p>
         <hr>
     </header>
+
     <nav>
         <a href="#new" id="addnew">Add New</a>
         <a href="#tag" id="addtag">Add Tag</a>
@@ -41,12 +43,15 @@
 
         <hr>
     </nav>
+
     <article>
-        <ul id="article">
+        <ul class="article" id="article">
             
-        </ul>
-        
+        </ul>    
+
+        <button id="pagination" class="pagination">Show more news</button>
     </article>
+
     <div id="login" class="modalDialog">
         <div class="login-box">
             <a href="#close" title="Close" class="close">X</a>
@@ -72,7 +77,7 @@
             <div>Add your new</div>
             <form action="">
             <span class="insertid">Insert id</span>
-            <input class="newid" id="newid" type="text" value="Insert id of the new here">
+            <input class="newid" id="newid" type="text" placeholder="Insert id of the new here">
 
             <span class="inserttitle">Insert title</span>
             <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here">
@@ -81,22 +86,22 @@
             <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here">
 
             <span class="insertcontent">Insert content of the new</span>
-            <textarea id="newcontent" type="text">Insert here the content of the new</textarea>
+            <textarea class="newcontent" id="newcontent" type="text">Insert here the content of the new</textarea>
 
             <span class="inserttags">Select tags</span>
-            <select id="selecttags" multiple="multiple">
+            <select class="selecttags" id="selecttags" multiple="multiple">
                 
             </select>
             
-            <button id="newbutton">Add New</button>
+            <button class="newbutton" id="newbutton">Add New</button>
             </form>
         </div>
     </div>
     <div id="readnew" class="modalDialog">
         <div class="readnew-box">
             <a href="#close" title="Close" class="close">X</a>
-            <h2 class="newtitle"></h2>
-            <p class="newcontent"></p>
+            <h2 class="readtitle"></h2>
+            <p class="readcontent"></p>
             <span class="newauthor"></span>
             <span class="newdate"></span>
             <span class="newtags"></span>
@@ -110,8 +115,8 @@
 
                 <form action="">
 
-                <span class="insertid">Change id</span>
-                <input class="editid" id="editid" type="text">
+                <span class="insertid">Id</span>
+                <input class="editid" id="editid" type="text" disabled="disabled">
 
                 <span class="inserttitle">Change title</span>
                 <input class="edittitle" id="edittitle" type="text"">
@@ -120,18 +125,19 @@
                 <input class="editsummary" id="editsummary" type="text">
 
                 <span class="insertcontent">Change content of the new</span>
-                <textarea id="editcontent" type="text"></textarea>
+                <textarea class="editcontent" id="editcontent" type="text"></textarea>
 
                 <span class="inserttags">Change tags</span>
-                <span class="tagsvalue"></span>
-                <select id="selecttags" multiple="multiple">
+
+                <select class="selecttags" id="tags-for-edit" multiple="multiple">
                     
                 </select>
                 
-                <button id="editbutton">Edit New</button>
+                <button class="editbutton" id="editbutton">Edit New</button>
                 </form>
             </div>
     </div>
+
     <footer>
         <hr>
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
@@ -148,7 +154,10 @@
                 <a class="icons__link" target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube"></i></a>
             </div>
     </footer>
- <script src='js/app.js'></script>       
+
+ <script src='js/app.js'></script>
+ <!--<script src='js/news.js'></script>-->        
+
 </body>
 
 </html>
