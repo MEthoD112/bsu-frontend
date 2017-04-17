@@ -19,12 +19,16 @@ header img {
 }
 header a {
     float:right;
-    color:#ffffff;
+    color: #ffffff;
     background: #7c88ce;
     border-radius:10px;
     margin:40px 20px 20px 0px;
     padding:5px 7px;
     text-decoration: none;
+}
+header a:hover {
+    color: #7c88ce;
+    background: #ffffff;
 }
 header p {
     margin:40px 0px 30px 15%;
@@ -33,10 +37,17 @@ header p {
     font-weight:bold;
     font-family: 'Indie Flower', cursive;
 }
-nav{
+.clearfix:after {
+   content: ".";
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
+nav {
     text-align: center;
 }
-body nav button,nav a {
+body nav button, nav a {
     display: inline-block;
     background: #7c88ce;
     color: #ffffff;
@@ -49,7 +60,10 @@ body nav a {
     display: none;
     text-decoration: none;
 }
-
+nav a:hover, nav button:hover {
+    color: #7c88ce;
+    background: #ffffff;
+}
 
 article {
     text-align: center;
@@ -100,6 +114,10 @@ article {
     color: #ffffff;
     background: #7c88ce;
     border-radius: 10px;
+}
+.article li button:hover,.article li a:hover, .pagination:hover {
+    color: #7c88ce;
+    background: #ffffff;
 }
 .article li .edit,.article li .delete {
     display: none;

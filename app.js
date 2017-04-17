@@ -36,15 +36,16 @@ app.post('/articles', (req, res) => {
     const articlesString = req.body;
     db.articles.save(articlesString);
 
-    res.send('Article is added');
+    const article = db.articles.find({id: articlesString.id});
+    res.send(article);
 });
 
 // post request for adding tag to database
 app.post('/posttags', (req, res) => {
     const tagString = req.body.tag;
     db.tags.save(tagString);
-
-    res.send('Tag is added');
+    const tags = db.tags.find();
+    res.send(tags);
 });
 
 // post request for editting article in database
@@ -60,15 +61,22 @@ app.post('/editarticle', (req, res) => {
 
     db.articles.update(query, articleString, options);
 
-    res.send('article is edited');
+    const article = db.articles.find(query);
+
+    res.send(article);
 });
 
 // post request for deleting article in database
 app.post('/deletearticle', (req, res) => {
     const id = req.body;
-    db.articles.remove(id);
 
-    res.send('Tag is added');
+    const bool = db.articles.remove(id);
+    if (bool) {
+        res.send(id);
+    } else {
+        res.send('No such article in database');
+    }
+    
 });
 
 app.listen(3000, () => { console.log('Port:3000'); });
