@@ -132,7 +132,7 @@ class Portal {
 
 			    const idObj = { id: idString };
 
-			    oReq.open('POST', '/deletearticle');
+			    oReq.open('DELETE', '/deletearticle');
 
 			    oReq.addEventListener('load', () => {
 		        	resolve(oReq.responseText);
@@ -186,7 +186,7 @@ class Portal {
 		    const promiseEditNew = new Promise((resolve, reject) => {
 			    const oReq = new XMLHttpRequest();
 
-			    oReq.open('POST', '/editarticle');
+			    oReq.open('PUT', '/editarticle');
 
 			    oReq.addEventListener('load', () => {
 		    		resolve(oReq.responseText);

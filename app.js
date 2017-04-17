@@ -56,7 +56,7 @@ app.post('/posttags', (req, res) => {
 });
 
 // post request for editting article in database
-app.post('/editarticle', (req, res) => {
+app.put('/editarticle', (req, res) => {
     const promiseEditArticle = new Promise((resolve, reject) => {
         const articleString = req.body;
         const query = { id: articleString.id };
@@ -73,7 +73,7 @@ app.post('/editarticle', (req, res) => {
 });
 
 // post request for deleting article in database
-app.post('/deletearticle', (req, res) => {
+app.delete('/deletearticle', (req, res) => {
     const promiseDeleteArticle = new Promise((resolve, reject) => {
         const id = req.body;
         db.articles.remove(id);
