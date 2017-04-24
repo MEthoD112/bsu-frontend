@@ -45,84 +45,118 @@ header p {
    clear: both;
 }
 nav {
+    float:left;
+    display: inline-block;
+    width:200px;
     text-align: center;
 }
 body nav button, nav a {
     display: inline-block;
-    background: #7c88ce;
-    color: #ffffff;
-    border-radius: 10px;
-    font-size: 24px;
-    margin-right:20px;
+    margin-bottom:20px;
+    margin-top:10px;
+    background: #ffffff;
+    color: #333333;
+    border-radius: 5px;
+    font-size: 20px;
     width: 105px;
+    border: 1px solid grey;
 }
 body nav a {
-    display: none;
+    text- text-align: center;
     text-decoration: none;
 }
 nav a:hover, nav button:hover {
-    color: #7c88ce;
-    background: #ffffff;
+    background: #f3f3f3;
+}
+nav label {
+    font-size: 20px;
+    font-weight: bold;
+}
+nav select {
+    margin-top:10px;
+}
+.cancelfilter {
+    width: 150px;
+}
+.filtertag {
+    width: 200px;
+    height: 210px;
+}
+.startdate {
+    margin-top:10px;
 }
 
 article {
+    margin-left:200px;
     text-align: center;
     padding-bottom: 140px;
 }
 .article li {
-    border:1px solid #222222;
-    box-shadow:0px 0px 3px;
+    position: relative;
     display:inline-block;
-    width:46%;
-    margin:20px 10px;
+    width:30%;
+    margin:10px 15px;
+    height: 400px;
     vertical-align: top;
     box-sizing: border-box;
+    background: #f3f3f3;
+}
+.article li:hover {
+    box-shadow:0px 0px 3px;
 }
 
 .article li h2 {
-    font-size:24px;
+    font-size:18px;
     margin:0px;
-    padding:10px 0px 15px 10px;
+    padding:5px 0px 5px 0px;
+    text-align: left;
 }
 .article li p {
     margin:0px 0px 25px;
-    font-size:16px;
-    padding: 0px 8px;
+    font-size:14px;
     text-align: left;
 }
-.article li span {
+.readnew, .ed, .del, .datearticle, .settags, .authorclass {
     display: inline-block;
-    color: #ffffff;
-    background: #7c88ce;
-    border-radius: 10px;
-    margin-right:10px;
-    width:200px;
-    margin-bottom:10px;
-}
-.article li button,.article li a {
-    display: inline-block;
-    color: #ffffff;
-    background: #7c88ce;
-    border-radius: 10px;
-    margin-right:10px;
-    width:200px;
-    margin-bottom:10px;
+    position: absolute;
+    left:0px;
+    top:370px;
     text-decoration: none;
+    color: #333333;
+    font-size: 18px;
 }
-.article button{
-    text-align: center;
-    color: #ffffff;
-    background: #7c88ce;
-    border-radius: 10px;
+li .ed {
+    left:60px;
 }
-.article li button:hover,.article li a:hover, .pagination:hover {
-    color: #7c88ce;
-    background: #ffffff;
+li .del {
+    left:105px;
+    background: #f3f3f3;
+    border:none;
+}
+.readnew:hover, .ed:hover, .del:hover {
+    text-decoration: underline;
+}
+li .datearticle {
+    left:190px;
+    top:374px;
+    font-size: 14px;
+    font-style: italic;
+}
+li .settags {
+    left:0px;
+    top:350px;
+    font-size: 14px;
+    font-style: italic;
+}
+li .authorclass {
+    left:0px;
+    top:330px;
+    font-size: 14px;
+    font-style: italic;
 }
 .article li .edit,.article li .delete {
     display: none;
 }
-
 .pagination {
     display: inline-block;
     margin: 0 auto;
@@ -138,7 +172,6 @@ article {
 
 .modalDialog {
     position: fixed;
-    font-family: Arial, Helvetica, sans-serif;
     top: 0;
     right: 0;
     bottom: 0;
@@ -158,19 +191,14 @@ article {
     display: block;
     pointer-events: auto;
 }
-
-
-.login-box, .tag-box {
+.tag-box {
     width: 300px;
-    height: 300px;
+    height: 180px;
     position: relative;
     margin: 13% auto;
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
     background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
 }
 .new-box {
     width: 600px;
@@ -180,24 +208,21 @@ article {
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
     background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
 }
-.new-box div {
+.new-box div p{
     text-align: center;
+    font-weight: bold;
+    font-size: 24px;
+    margin: 0;
 }
 .readnew-box {
     width: 700px;
-    height: 620px;
+    height: 720px;
     position: relative;
     margin: 1% auto;
     padding: 5px 20px 13px 20px;
     border-radius: 10px;
     background: #fff;
-    background: -moz-linear-gradient(#fff, #999);
-    background: -webkit-linear-gradient(#fff, #999);
-    background: -o-linear-gradient(#fff, #999);
 }
 .close {
     float: right;
@@ -209,12 +234,22 @@ article {
     filter: alpha(opacity=20);
     opacity: .2;
 }
-
-
-.modalDialog .logintext, .modalDialog .tagtext {
+.close:hover {
+    text-decoration: none;
+}
+.imageform {
     position: absolute;
-    left:126px;
+    left:260px;
+    top:620px;
+}
+
+
+.modalDialog .tagtext {
+    position: absolute;
+    left:117px;
     top:20px;
+    font-size: 24px;
+    font-weight: bold;
 }
 .modalDialog .pwd {
     position: absolute;
@@ -244,7 +279,7 @@ article {
 .modalDialog .tagbutton {
     position: absolute;
     left:126px;
-    top:230px;
+    top:127px;
 }
 .modalDialog .insertid,.modalDialog .insertid {
     position: absolute;
@@ -292,13 +327,13 @@ article {
 }
 .modalDialog .inserttags,.modalDialog .inserttags {
     position: absolute;
-    top:553px;
-    left:251px;
+    top:530px;
+    left:60px;
 }
 .selecttags {
     position: absolute;
-    top:585px;
-    left:202px;
+    top:570px;
+    left:28px;
     width: 190px;
     height: 200px;
 }
@@ -312,6 +347,12 @@ article {
     top: 523px;
     left: 199px;
 }
+.readnew-box .readtitle {
+    margin: 10px 0;
+}
+.readnew-box .readimage {
+    margin-left:65px;
+}
 .readnew-box .newtitle{
     position: absolute;
     top:0px;
@@ -324,18 +365,20 @@ article {
 }
 .readnew-box .newauthor{
     position: absolute;
-    top:220px;
+    bottom:38px;
     left:15px;
+    font-style: italic;
 }
 .readnew-box .newdate{
     position: absolute;
-    top:270px;
+    bottom:10px;
     left:15px;
 }
 .readnew-box .newtags{
     position: absolute;
-    top:310px;
+    bottom:65px;
     left:15px;
+    font-style: italic;
 }
 
 

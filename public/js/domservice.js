@@ -15,7 +15,7 @@ class DomService {
         this.editsummary = document.getElementById('editsummary');
         this.editcontent = document.getElementById('editcontent');
         this.tagsForEdit = document.getElementById('tags-for-edit');
-        this.articlesForPage = 20;
+        this.articlesForPage = 12;
     }
 
     displayNews(articles) {
@@ -30,23 +30,35 @@ class DomService {
             const a = document.createElement('a');
             const a1 = a.cloneNode(true);
             const button = document.createElement('button');
+            const img = document.createElement('img');
+            img.style.width = '100%';
+            img.height = 200;
+
 
             li.setAttribute('data-id', item.id);
+
+            const link = articlesService.getImage(item.id);
+            link ? img.src = link.image : img.style.display = 'none';
             h2.innerHTML = item.title;
             p.innerHTML = item.summary;
             span.innerHTML = item.createdAt.toDateString();
-            span1.innerHTML = item.author;
-            span2.innerHTML = item.tags;
+            span.setAttribute('class', 'datearticle');
+            span1.innerHTML = 'Author: ' + item.author;
+            span1.setAttribute('class', 'authorclass');
+            span2.innerHTML = 'Tags: ' + item.tags;
+            span2.setAttribute('class', 'settags')
             a.innerHTML = 'Read';
+            a.setAttribute('class', 'readnew')
             a.href = '#readnew';
             a1.setAttribute('class', 'edit ed');
 
             a1.innerHTML = 'Edit';
             a1.href = '#editnew';
             button.setAttribute('class', 'delete del');
-
+            button.id = 'deletearticle'
             button.innerHTML = 'Delete';
 
+            li.appendChild(img);
             li.appendChild(h2);
             li.appendChild(p);
             li.appendChild(span);
@@ -57,44 +69,6 @@ class DomService {
             li.appendChild(button);
             this.ul.appendChild(li);
         });
-    }
-
-    addNew(article) {
-            const li = document.createElement('li');
-            const h2 = document.createElement('h2');
-            const p = document.createElement('p');
-            const span = document.createElement('span');
-            const span1 = span.cloneNode(true);
-            const span2 = span.cloneNode(true);
-            const a = document.createElement('a');
-            const a1 = a.cloneNode(true);
-            const button = document.createElement('button');
-
-            li.setAttribute('data-id', article.id);
-            h2.innerHTML = article.title;
-            p.innerHTML = article.summary;
-            span.innerHTML = article.createdAt.toDateString();
-            span1.innerHTML = article.author;
-            span2.innerHTML = article.tags;
-
-            a.innerHTML = 'Read';
-            a.href = '#readnew';
-            a1.setAttribute('class', 'ed');
-            a1.innerHTML = 'Edit';
-            a1.href = '#editnew';
-
-            button.setAttribute('class', 'del');
-            button.innerHTML = 'Delete';
-
-            li.appendChild(h2);
-            li.appendChild(p);
-            li.appendChild(span);
-            li.appendChild(span1);
-            li.appendChild(span2);
-            li.appendChild(a);
-            li.appendChild(a1);
-            li.appendChild(button);
-            this.ul.appendChild(li);
     }
 
     removeNew(id) {
@@ -124,12 +98,15 @@ class DomService {
         const author = document.getElementsByClassName('newauthor')[0];
         const date = document.getElementsByClassName('newdate')[0];
         const tags = document.getElementsByClassName('newtags')[0];
+        const img = document.getElementsByClassName('readimage')[0];
 
         h2.innerHTML = article.title;
+        const link = articlesService.getImage(id);
+        link ? img.src = link.image : img.style.display = 'none';
         p.innerHTML = article.content;
-        author.innerHTML = article.author;
+        author.innerHTML = 'Author: ' + article.author;
         date.innerHTML = article.createdAt;
-        tags.innerHTML = article.tags.join(',');
+        tags.innerHTML = 'Tags: ' + article.tags.join(',');
     }
 
     showEditNew() {
@@ -178,9 +155,19 @@ class DomService {
                 const h2 = item.getElementsByTagName('h2')[0];
                 const p = item.getElementsByTagName('p')[0];
                 const span = item.getElementsByTagName('span')[2];
+                const img = item.getElementsByTagName('img')[0];
+
+                const link = articlesService.getImage(article.id);
+                if (link) {
+                    img.src = link.image;
+                    img.style.display = 'block';
+                } else {
+                    img.style.display = 'none';
+                } 
+
                 h2.innerHTML = article.title;
                 p.innerHTML = article.summary;
-                span.innerHTML = article.tags.join(',');
+                span.innerHTML = 'Tags :' + article.tags.join(',');
 
                 Article.title = article.title;
                 Article.summary = article.summary;
@@ -200,8 +187,8 @@ class DomService {
         if (user) {
 
             this.signup.innerHTML = user;
-            this.addnew.style.display = 'inline-block';
-            this.addtag.style.display = 'inline-block';
+            this.addnew.style.visibility = 'visible';
+            this.addtag.style.visibility = 'visible';
 
             newEdit.forEach((item) => {
                 item.classList.remove('edit');
@@ -215,9 +202,8 @@ class DomService {
         if (!user) {
             newEdit = newEdit || [];
             newDel = newDel || [];
-            this.signup.innerHTML = 'SignUp';
-            this.addnew.style.display = 'none';
-            this.addtag.style.display = 'none';
+            this.addnew.style.visibility = 'hidden';
+            this.addtag.style.visibility = 'hidden';
 
             newEdit.forEach((item) => {
                 item.classList.add('edit');
@@ -264,13 +250,13 @@ class DomService {
 
     getFilterAuthor() {
         const selectedAuthor = this.filterauthor.value;
-        this.articlesForPage = 20;
+        this.articlesForPage = 12;
         return selectedAuthor;
     }
 
     getFilterTags() {
         const tags = this.getSelection(this.filtertag);
-        this.articlesForPage = 20;
+        this.articlesForPage = 12;
         return tags;
     }
 
@@ -282,7 +268,7 @@ class DomService {
         arr[0] = Date.parse(start);
         arr[1] = Date.parse(end);
 
-        this.articlesForPage = 20;
+        this.articlesForPage = 12;
 
         return arr;
     }
@@ -313,21 +299,40 @@ class DomService {
     showPaginationButton(articles) {
         const newsCount = document.getElementById('article').querySelectorAll('li').length;
         const pagin = document.getElementById('pagination');
+        let length;
 
-        articles = articles || articlesService.getArticles();
+        if (articlesService.articlesStorage) {
+            articles = articles || articlesService.articlesStorage;
+            length = articlesService.articlesStorage.length;
+        } else {
+            articles = articles || articlesService.getArticles();
+            length = articlesService.getArticles().length;
+        }
+        
 
-        (newsCount === articles.length) ? pagin.classList.add('pagination-view') :
-                                       pagin.classList.remove('pagination-view');   
+        if (articles.length < 6 || newsCount === length) {
+            pagin.classList.add('pagination-view');
+            return;
+        }
+        if (articles.length >= 6) {
+            pagin.classList.remove('pagination-view');
+        }
     }
 
     paginatNews() {
         const newsCount = document.getElementById('article').querySelectorAll('li').length;
         const articles = articlesService.getArticles();
-
-        this.displayNews(articlesService.getArticles(newsCount, this.articlesForPage));
-
-        this.articlesForPage += 10;
+        if (articlesService.articlesStorage) {
+            this.displayNews(articlesService.articlesStorage.slice(newsCount, this.articlesForPage));
+        } else {
+            this.displayNews(articlesService.getArticles(newsCount, this.articlesForPage));
+        }
+        this.articlesForPage += 6;
 
         this.showPaginationButton();
+
+        if (articlesService.articlesStorage && newsCount + 6 >= articlesService.articlesStorage.length) {
+            articlesService.articlesStorage = null;
+        }
     }
 }

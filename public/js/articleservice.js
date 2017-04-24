@@ -20,6 +20,21 @@ class ArticlesService {
         });
 
         document.addEventListener('DOMContentLoaded', () => {
+            const promiseImage = new Promise((resolve, reject) => {
+                const oReq = new XMLHttpRequest();
+
+                oReq.open('GET', '/images');
+
+                oReq.addEventListener('load', () => {
+                    resolve(oReq.responseText);
+                });
+
+                oReq.send();
+            });
+            promiseImage.then(result => this.images = JSON.parse(result));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
             const promiseTag = new Promise((resolve, reject) => {
                 const oReq = new XMLHttpRequest();
 
@@ -28,7 +43,7 @@ class ArticlesService {
                 oReq.addEventListener('load', () => {
                     resolve(oReq.responseText)
                     
-                    setTimeout(portal.initApp, 30);
+                    setTimeout(portal.initApp, 150);
 
                 });
 
@@ -44,8 +59,8 @@ class ArticlesService {
         let arr = [];
 
         this.articles.sort((a, b) => {
-            if (a.createdAt > b.createdAt) { return 1; }
-            if (a.createdAt < b.createdAt) { return -1; }
+            if (a.createdAt > b.createdAt) { return -1; }
+            if (a.createdAt < b.createdAt) { return 1; }
         });
 
         if (filterConfig) {
@@ -83,6 +98,14 @@ class ArticlesService {
         });
         return this.article;
     }
+
+    getImage(id) {
+        for (let i = 0; i < this.images.length; i++) {
+            if (this.images[i].id == id) {
+                return this.images[i];
+            }
+        }
+    }    
 
     validateArticle(article) {
         if (!article) {
@@ -177,6 +200,3 @@ class ArticlesService {
         return arr;
     }
 }
-
-
-

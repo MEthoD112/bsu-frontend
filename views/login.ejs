@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    <title>News Portal</title>
+	    <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
+	    <link rel="stylesheet" href="css/style.css">
+	    <style>
+	    	.wrapper {
+	    		margin:100px auto;
+	    		text-align: center;
+	    	}
+	    	.login, .signup {
+	    		font-size:24px;
+	    		border-radius: 10px;
+	    		height:300px;
+	    	}
+	    	.login {
+	    		display: inline-block;
+	    		width:250px;
+	    		text-align:center;
+	    		margin-right: 100px;
+	    	}
+	    	.signup {
+	    		display:inline-block;
+	    		width:250px;
+	    		text-align: center;
+	    	}
+	    	input {
+		    	width: 200px;
+		    	height: 20px;
+	    	}
+	    	.button {
+	    		background: #7c88ce;
+	    		height:30px;
+	    		margin-top:15px;
+	    		color: white;
+	    		font-size:22px;
+	    		border-radius:5px;
+	    	}
+	    	.header {
+	    		display:inline-block;
+	    		text-align:center;
+	    		width:135px;
+		    	border: 1px solid #5e81a8;
+		    	border-radius:5px;
+		    	background: #7c88ce;
+		    	color: white;
+		    	font-size:27px;
+	    	}
+	    	.alert {
+	    		text-align:center;
+	    		font-size:24px;
+	    		color:red;
+	    		text-transform:uppercase;
+	    	}
+	    	.wrapper .input {
+	    		font-size:20px;
+	    	}
+	    </style>
+	</head>
+	<body>
+		<header class="clearfix">
+	        <img width="180" height="90" src="img/logo.png" alt="here must be a image">
+	        <a id="signup" href="/">Go To News</a>
+	        <p>“I cannot tell a lie.” —George Washington </p>
+	        <hr>
+    	</header>
+		<div class="wrapper">
+			<div class="login">
+				<h2 class="header">SingIn</h2>
+				<form action="/login" method="post">
+					<div>
+					<label>Username:</label>
+					<input class="input" type="text" name="username"/><br/>
+					</div>
+					<div>
+					<label>Password:</label>
+					<input class="input" type="password" name="password"/>
+					</div>
+					<div>
+					<input class="button" type="submit" value="Submit"/>
+					</div>
+				</form>
+			</div>	
+			<div class="signup">	
+				<h2 class="header">SingUp</h2>
+				<form action="/register" method="post">
+					<div>
+					<label>Username:</label>
+					<input class="input" type="text" name="username"/><br/>
+					</div>
+					<div>
+					<label>Password:</label>
+					<input class="input" type="password" name="password"/>
+					</div>
+					<div>
+					<input class="button" type="submit" value="Submit"/>
+					</div>
+				</form>
+			</div>	
+		</div>
+	<% if (message) { %>
+		<p class="alert"><%= message %></p>
+	<% }%>
+	</body>
+</html>

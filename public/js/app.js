@@ -7,3 +7,5 @@ const domService = new DomService();
 const user = new User();
 
 const portal = new Portal();
+
+const images = new Images();
