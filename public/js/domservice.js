@@ -144,6 +144,7 @@ class DomService {
     }
 
     editNew(article) {
+        //console.log(article);
         const Article = articlesService.getArticle(article.id);
 
         const li = [...this.ul.getElementsByTagName('li')];
@@ -187,8 +188,8 @@ class DomService {
         if (user) {
 
             this.signup.innerHTML = user;
-            this.addnew.style.visibility = 'visible';
-            this.addtag.style.visibility = 'visible';
+            this.addnew.style.display = 'block';
+            this.addtag.style.display = 'block';
 
             newEdit.forEach((item) => {
                 item.classList.remove('edit');
@@ -202,8 +203,8 @@ class DomService {
         if (!user) {
             newEdit = newEdit || [];
             newDel = newDel || [];
-            this.addnew.style.visibility = 'hidden';
-            this.addtag.style.visibility = 'hidden';
+            this.addnew.style.display = 'none';
+            this.addtag.style.display = 'none';
 
             newEdit.forEach((item) => {
                 item.classList.add('edit');

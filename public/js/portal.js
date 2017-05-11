@@ -34,7 +34,11 @@ class Portal {
 		        oReq.open('POST', '/posttags');
 
 		        oReq.addEventListener('load', () => {
-		        	resolve(oReq.responseText);
+
+		        	let tags = JSON.parse(oReq.responseText).tags;
+                    tags = tags.join(',');
+                    tags = tags.split(',');
+                    resolve(tags);
                     
                 });
 
@@ -48,7 +52,7 @@ class Portal {
 		        oReq.send(tagString);
 
 		    });
-		    promiseAddTag.then(result => this.addTag(JSON.parse(result)));
+		    promiseAddTag.then(result => this.addTag(result));
 		});
 
 		this.addNewButton = document.getElementById('addnew');
@@ -67,7 +71,7 @@ class Portal {
 			const promiseAddNew = new Promise((resolve, reject) => {
 
 				const article = that.createNew();
-		        
+
 		        const oReq = new XMLHttpRequest();
 
 		        if (!articlesService.validateArticle(article)) {
@@ -157,6 +161,7 @@ class Portal {
 		this.editButton = document.getElementById('editbutton');
 		this.editButton.addEventListener('click', () => {
 		    const article = this.createEditedNew();
+		    console.log(article);
 		    const promiseEditNew = new Promise((resolve, reject) => {
 			    const oReq = new XMLHttpRequest();
 
@@ -175,10 +180,7 @@ class Portal {
 			    // sent request body here as a string
 			    oReq.send(articleString);
 			});
-			promiseEditNew.then(result => this.editArticle(JSON.parse(result, (key, value) => {
-                        if (key == 'createdAt') { return new Date(value); }
-                        return value;
-            })[0]));
+			promiseEditNew.then(result => this.editArticle(JSON.parse(result)));
 		});
 
 		this.pagination = document.getElementById('pagination');
@@ -207,26 +209,26 @@ class Portal {
     }
 
     createEditedNew() {
-    		const editid = document.getElementById('editid');
-		    const id = editid.value;
-		    const edittitle = document.getElementById('edittitle');
-		    const editsummary = document.getElementById('editsummary');
-		    const editcontent = document.getElementById('editcontent');
-		    const tagsForEdit = document.getElementById('tags-for-edit');
-		    const selected = domService.getSelection(tagsForEdit);
+    	const editid = document.getElementById('editid');
+		const id = editid.value;
+		const edittitle = document.getElementById('edittitle');
+		const editsummary = document.getElementById('editsummary');
+		const editcontent = document.getElementById('editcontent');
+		const tagsForEdit = document.getElementById('tags-for-edit');
+		const selected = domService.getSelection(tagsForEdit);
 
-		    const article = articlesService.getArticle(id);
+		const article = articlesService.getArticle(id);
 
-		    if (!edittitle.value || !editsummary.value || !editcontent.value || selected.length < 1) {
-		        alert('Unacceptable editions');
-		        return;
-		    }
+		if (!edittitle.value || !editsummary.value || !editcontent.value || selected.length < 1) {
+		    alert('Unacceptable editions');
+		    return;
+		}
 
-		    article.title = edittitle.value;
-		    article.summary = editsummary.value;
-		    article.content = editcontent.value;
-		    article.tags = selected;
-		    return article;
+		article.title = edittitle.value;
+		article.summary = editsummary.value;
+		article.content = editcontent.value;
+		article.tags = selected;
+		return article;
     }
 
     paginatNews() {
@@ -236,6 +238,8 @@ class Portal {
 
 	addTag(tagsArray) {
 	    const inputtag = tagsArray[tagsArray.length - 1];
+
+	    console.log(inputtag);
 	    const tags = articlesService.getTags();
 	    const tagWindow = document.getElementById('tag');
 
@@ -329,6 +333,7 @@ class Portal {
 	}
 
 	editArticle(article) {
+		console.log(article);
 	    domService.editNew(article);
 	    this.editWindow.style.display = 'none';
 	}

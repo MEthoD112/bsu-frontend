@@ -14,8 +14,9 @@ class ArticlesService {
                 oReq.send();
             });
             promiseArticle.then(result => this.articles = JSON.parse(result, (key, value) => {
-                        if (key == 'createdAt') { return new Date(value); }
-                        return value;
+                if (key == 'createdAt') {
+                    return new Date(value); }
+                return value;
             }));
         });
 
@@ -26,12 +27,12 @@ class ArticlesService {
                 oReq.open('GET', '/images');
 
                 oReq.addEventListener('load', () => {
-                    resolve(oReq.responseText);
+                    resolve(this.images = JSON.parse(oReq.responseText));
                 });
 
                 oReq.send();
             });
-            promiseImage.then(result => this.images = JSON.parse(result));
+            promiseImage.then(result => portal.initApp());
         });
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -41,15 +42,17 @@ class ArticlesService {
                 oReq.open('GET', '/tags');
 
                 oReq.addEventListener('load', () => {
-                    resolve(oReq.responseText)
-                    
-                    setTimeout(portal.initApp, 150);
+
+                    let tags = JSON.parse(oReq.responseText)[0].tags;
+                    tags = tags.join(',');
+                    tags = tags.split(',');
+                    resolve(tags);
 
                 });
 
                 oReq.send();
             });
-            promiseTag.then(result => this.tags = JSON.parse(result));    
+            promiseTag.then(result => this.tags = result);
         });
     }
 
@@ -59,8 +62,10 @@ class ArticlesService {
         let arr = [];
 
         this.articles.sort((a, b) => {
-            if (a.createdAt > b.createdAt) { return -1; }
-            if (a.createdAt < b.createdAt) { return 1; }
+            if (a.createdAt > b.createdAt) {
+                return -1; }
+            if (a.createdAt < b.createdAt) {
+                return 1; }
         });
 
         if (filterConfig) {
@@ -74,12 +79,12 @@ class ArticlesService {
                 return arr.splice(skip, top);
             }
 
-           if (filterConfig.tags) {
+            if (filterConfig.tags) {
                 for (let j = 0; j < filterConfig.tags.length; j++) {
 
                     const arrNew = this.articles.filter((item) => {
                         return (item.tags.indexOf(filterConfig.tags[j]) !== -1 &&
-                                                        arr.indexOf(item) === -1);
+                            arr.indexOf(item) === -1);
                     });
 
                     arr = arr.concat(arrNew);
@@ -93,7 +98,7 @@ class ArticlesService {
     getArticle(id) {
         this.articles.forEach((item) => {
             if (item.id === id) {
-                 this.article = item;
+                this.article = item;
             }
         });
         return this.article;
@@ -105,20 +110,25 @@ class ArticlesService {
                 return this.images[i];
             }
         }
-    }    
+    }
 
     validateArticle(article) {
         if (!article) {
             return false;
         }
 
-        if (this.articles.some((item) => { return item.id === article.id; })) {
+        if (this.articles.some((item) => {
+                return item.id === article.id; })) {
+
             return false;
         }
 
-        if (article.tags.every((item) => { return this.tags.indexOf(item) === -1; })) {
+        /*if (article.tags.every((item) => {
+                return this.tags.indexOf(item) === -1; })) {
+
+            console.log(2);
             return false;
-        }
+        } */
 
         if (typeof article.id === 'string' &&
             !isNaN(+article.id) &&

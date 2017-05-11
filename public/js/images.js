@@ -57,7 +57,7 @@ class Images {
 				editimage.height = 200;
 
 				const reader = new FileReader();
-				reader.onload = function(event) {
+				reader.onload = (event) => {
 					editimage.src = event.target.result;
 					const link = event.target.result;
 					const idString = document.getElementById('editid').value;
