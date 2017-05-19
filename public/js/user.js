@@ -1,4 +1,6 @@
-class User {
+import { domService } from './app';
+
+export default class User {
     constructor() {
         const that = this;
 
@@ -19,7 +21,6 @@ class User {
                 }
             });
             oReq.send();
-
         });
         promise.then(result => domService.showUserItems(that.user));
     }

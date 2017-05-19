@@ -18,7 +18,7 @@ module.exports = (passport) => {
                         console.log('User Not Found with username ' + username);
                         return done(null, false, req.flash('message', 'User Not found.'));
                     }
-                    // User exists but wrong password, log the error 
+                    // User exists but wrong password, log the error
                     if (!isValidPassword(user, password)) {
                         console.log('Invalid Password');
                         return done(null, false, req.flash('message', 'Invalid Password')); // redirect back to login page
@@ -33,5 +33,5 @@ module.exports = (passport) => {
 
     const isValidPassword = (user, password) => {
         return bCrypt.compareSync(password, user.password);
-    }
-}
+    };
+};

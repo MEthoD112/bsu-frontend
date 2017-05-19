@@ -1,0 +1,512 @@
+/* line 24, ../sass/screen.scss */
+html {
+  height: 100%;
+}
+
+/* line 28, ../sass/screen.scss */
+body {
+  position: relative;
+  max-width: 1440px;
+  min-height: 100%;
+  margin: 0 auto;
+  background: #ffffff;
+  font-family: 'Roboto', sans-serif;
+  color: #333333;
+}
+/* line 36, ../sass/screen.scss */
+body header {
+  width: 100%;
+}
+/* line 38, ../sass/screen.scss */
+body header img {
+  padding: 20px 0px 20px 20px;
+  float: left;
+}
+/* line 42, ../sass/screen.scss */
+body header a {
+  float: right;
+  color: #ffffff;
+  background: #7c88ce;
+  border-radius: 10px;
+  margin: 40px 20px 20px 0px;
+  padding: 5px 7px;
+  text-decoration: none;
+}
+/* line 50, ../sass/screen.scss */
+body header a:hover {
+  color: #7c88ce;
+  background: #ffffff;
+}
+/* line 55, ../sass/screen.scss */
+body header p {
+  font-size: 36px;
+  text-align: center;
+  margin: 40px 0px 30px 15%;
+  display: inline-block;
+  font-weight: bold;
+  font-family: 'Indie Flower', cursive;
+}
+/* line 63, ../sass/screen.scss */
+body .clearfix:after {
+  content: "";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+/* line 70, ../sass/screen.scss */
+body nav {
+  float: left;
+  display: inline-block;
+  width: 200px;
+  text-align: center;
+}
+/* line 75, ../sass/screen.scss */
+body nav button, body nav a {
+  font-size: 20px;
+  text-align: center;
+  margin: 10px auto 20px;
+  display: inline-block;
+  background: #ffffff;
+  color: #333333;
+  border-radius: 5px;
+  width: 105px;
+  border: 1px solid grey;
+}
+/* line 83, ../sass/screen.scss */
+body nav button:hover, body nav a:hover {
+  background: #f3f3f3;
+}
+/* line 87, ../sass/screen.scss */
+body nav a {
+  text-decoration: none;
+}
+/* line 90, ../sass/screen.scss */
+body nav label {
+  font-size: 20px;
+  font-weight: bold;
+}
+/* line 94, ../sass/screen.scss */
+body nav select {
+  margin-top: 10px;
+}
+/* line 97, ../sass/screen.scss */
+body nav .cancelfilter {
+  width: 150px;
+}
+/* line 100, ../sass/screen.scss */
+body nav .filtertag {
+  width: 200px;
+  height: 210px;
+}
+/* line 103, ../sass/screen.scss */
+body nav .startdate {
+  margin-top: 10px;
+}
+/* line 107, ../sass/screen.scss */
+body article {
+  margin-left: 200px;
+  text-align: center;
+  padding-bottom: 140px;
+}
+/* line 111, ../sass/screen.scss */
+body article li {
+  width: 30%;
+  height: 400px;
+  position: relative;
+  display: inline-block;
+  margin: 10px 15px;
+  vertical-align: top;
+  box-sizing: border-box;
+  background: #f3f3f3;
+}
+/* line 119, ../sass/screen.scss */
+body article li:hover {
+  box-shadow: 0px 0px 3px;
+}
+/* line 122, ../sass/screen.scss */
+body article li div {
+  overflow: hidden;
+  height: 200px;
+}
+/* line 125, ../sass/screen.scss */
+body article li div img {
+  width: 100%;
+  height: 200px;
+  filter: grayscale(20%);
+  transition: all 1s linear;
+}
+/* line 129, ../sass/screen.scss */
+body article li div img:hover {
+  transform: scale(1.2, 1.2);
+  filter: brightness(120%);
+}
+/* line 135, ../sass/screen.scss */
+body article li h2 {
+  font-size: 18px;
+  text-align: left;
+  margin: 0px;
+  padding: 5px 0px 5px 0px;
+}
+/* line 139, ../sass/screen.scss */
+body article li p {
+  font-size: 14px;
+  text-align: left;
+  margin: 0px 0px 25px;
+}
+/* line 142, ../sass/screen.scss */
+body article li .ed {
+  left: 60px !important;
+}
+/* line 145, ../sass/screen.scss */
+body article li .del {
+  left: 105px !important;
+  background: #f3f3f3;
+  border: none;
+}
+/* line 150, ../sass/screen.scss */
+body article li .readnew, body article li .ed, body article li .del, body article li .datearticle, body article li .settags, body article li .authorclass {
+  display: inline-block;
+  position: absolute;
+  top: 370px;
+  left: 0px;
+  text-decoration: none;
+  color: #333333;
+  font-size: 18px;
+}
+/* line 156, ../sass/screen.scss */
+body article li .readnew:hover, body article li .ed:hover, body article li .del:hover, body article li .datearticle:hover, body article li .settags:hover, body article li .authorclass:hover {
+  text-decoration: underline;
+}
+/* line 160, ../sass/screen.scss */
+body article li .datearticle {
+  position: absolute;
+  top: 374px;
+  left: 190px;
+  font-size: 14px;
+  font-style: italic;
+}
+/* line 165, ../sass/screen.scss */
+body article li .settags {
+  position: absolute;
+  top: 350px;
+  left: 0px;
+  font-size: 14px;
+  font-style: italic;
+}
+/* line 170, ../sass/screen.scss */
+body article li .authorclass {
+  position: absolute;
+  top: 330px;
+  left: 0px;
+  font-size: 14px;
+  font-style: italic;
+}
+/* line 175, ../sass/screen.scss */
+body article li .edit, body article li .delete {
+  display: none;
+}
+/* line 179, ../sass/screen.scss */
+body article .pagination {
+  display: inline-block;
+  margin: 0 auto;
+  color: #ffffff;
+  background: #7c88ce;
+  border-radius: 10px;
+  width: 200px;
+  margin-bottom: 10px;
+  outline: none;
+}
+/* line 189, ../sass/screen.scss */
+body article .pagination-view {
+  display: none;
+}
+/* line 193, ../sass/screen.scss */
+body .modalDialog {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 99999;
+  transition: opacity 400ms ease-in;
+  display: none;
+  width: 100%;
+  min-width: 320px;
+  pointer-events: none;
+}
+/* line 205, ../sass/screen.scss */
+body .modalDialog:target {
+  display: block;
+  pointer-events: auto;
+}
+/* line 210, ../sass/screen.scss */
+body .modalDialog div .close {
+  float: right;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+/* line 219, ../sass/screen.scss */
+body .modalDialog div .close:hover {
+  text-decoration: none;
+}
+/* line 223, ../sass/screen.scss */
+body .modalDialog div .imageform {
+  position: absolute;
+  top: 620px;
+  left: 260px;
+}
+/* line 226, ../sass/screen.scss */
+body .modalDialog div .pwd {
+  position: absolute;
+  top: 120px;
+  left: 110px;
+}
+/* line 229, ../sass/screen.scss */
+body .modalDialog div .loginfield {
+  position: absolute;
+  top: 59px;
+  left: 46px;
+}
+/* line 232, ../sass/screen.scss */
+body .modalDialog div .inppwd {
+  position: absolute;
+  top: 160px;
+  left: 46px;
+}
+/* line 235, ../sass/screen.scss */
+body .modalDialog div .signoutbutton {
+  position: absolute;
+  top: 230px;
+  left: 170px;
+}
+/* line 238, ../sass/screen.scss */
+body .modalDialog div .signbutton {
+  position: absolute;
+  top: 230px;
+  left: 80px;
+}
+/* line 241, ../sass/screen.scss */
+body .modalDialog div .insertid {
+  position: absolute;
+  top: 35px;
+  left: 100px;
+}
+/* line 244, ../sass/screen.scss */
+body .modalDialog div .newid, body .modalDialog div .editid {
+  position: absolute;
+  top: 60px;
+  left: 100px;
+}
+/* line 247, ../sass/screen.scss */
+body .modalDialog div .inserttitle {
+  position: absolute;
+  top: 95px;
+  left: 100px;
+}
+/* line 250, ../sass/screen.scss */
+body .modalDialog div .newtitle, body .modalDialog div .edittitle {
+  position: absolute;
+  top: 120px;
+  left: 100px;
+  width: 400px;
+}
+/* line 254, ../sass/screen.scss */
+body .modalDialog div .newsummary, body .modalDialog div .editsummary {
+  position: absolute;
+  top: 185px;
+  left: 100px;
+  width: 400px;
+}
+/* line 258, ../sass/screen.scss */
+body .modalDialog div .insertcontent {
+  position: absolute;
+  top: 224px;
+  left: 100px;
+}
+/* line 261, ../sass/screen.scss */
+body .modalDialog div .newcontent, body .modalDialog div .editcontent {
+  position: absolute;
+  top: 260px;
+  left: 100px;
+  width: 400px;
+  height: 240px;
+}
+/* line 265, ../sass/screen.scss */
+body .modalDialog div .inserttags {
+  position: absolute;
+  top: 530px;
+  left: 60px;
+}
+/* line 268, ../sass/screen.scss */
+body .modalDialog div .selecttags {
+  position: absolute;
+  top: 570px;
+  left: 28px;
+  width: 190px;
+  height: 200px;
+}
+/* line 272, ../sass/screen.scss */
+body .modalDialog div .newbutton, body .modalDialog div .editbutton {
+  position: absolute;
+  top: 790px;
+  left: 258px;
+}
+/* line 276, ../sass/screen.scss */
+body .modalDialog .tag-box {
+  width: 300px;
+  height: 180px;
+  position: relative;
+  margin: 13% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+}
+/* line 283, ../sass/screen.scss */
+body .modalDialog .tag-box .tagtext {
+  position: absolute;
+  top: 20px;
+  left: 117px;
+  font-size: 24px;
+  font-weight: bold;
+}
+/* line 288, ../sass/screen.scss */
+body .modalDialog .tag-box .tagfield {
+  position: absolute;
+  top: 59px;
+  left: 46px;
+}
+/* line 291, ../sass/screen.scss */
+body .modalDialog .tag-box .tagbutton {
+  position: absolute;
+  top: 127px;
+  left: 126px;
+}
+/* line 295, ../sass/screen.scss */
+body .modalDialog .new-box {
+  width: 600px;
+  height: 820px;
+  position: relative;
+  margin: 1% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+}
+/* line 303, ../sass/screen.scss */
+body .modalDialog .new-box div p {
+  font-size: 24px;
+  text-align: center;
+  margin: 0;
+  font-weight: bold;
+}
+/* line 308, ../sass/screen.scss */
+body .modalDialog .new-box .insertsummary {
+  position: absolute;
+  top: 155px;
+  left: 100px;
+}
+/* line 311, ../sass/screen.scss */
+body .modalDialog .new-box .tagsvalue {
+  position: absolute;
+  top: 523px;
+  left: 199px;
+}
+/* line 314, ../sass/screen.scss */
+body .modalDialog .new-box .insertid {
+  position: absolute;
+  top: 35px;
+  left: 100px;
+}
+/* line 318, ../sass/screen.scss */
+body .modalDialog .readnew-box {
+  width: 700px;
+  height: 720px;
+  position: relative;
+  margin: 1% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+}
+/* line 325, ../sass/screen.scss */
+body .modalDialog .readnew-box .readtitle {
+  margin: 10px 0;
+}
+/* line 328, ../sass/screen.scss */
+body .modalDialog .readnew-box .readimage {
+  margin-left: 65px;
+}
+/* line 331, ../sass/screen.scss */
+body .modalDialog .readnew-box .newtitle {
+  position: absolute;
+  top: 0px;
+  left: 40px;
+}
+/* line 334, ../sass/screen.scss */
+body .modalDialog .readnew-box .newcontent {
+  position: absolute;
+  top: 80px;
+  left: 15px;
+}
+/* line 337, ../sass/screen.scss */
+body .modalDialog .readnew-box .newauthor {
+  position: absolute;
+  bottom: 38px;
+  left: 15px;
+  font-style: italic;
+}
+/* line 341, ../sass/screen.scss */
+body .modalDialog .readnew-box .newdate {
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+}
+/* line 344, ../sass/screen.scss */
+body .modalDialog .readnew-box .newtags {
+  position: absolute;
+  bottom: 65px;
+  left: 15px;
+  font-style: italic;
+}
+/* line 350, ../sass/screen.scss */
+body footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+/* line 353, ../sass/screen.scss */
+body footer div {
+  margin-left: 20px;
+  padding-top: 0px;
+  width: 320px;
+  display: inline-block;
+}
+/* line 359, ../sass/screen.scss */
+body footer span {
+  padding-left: 20px;
+}
+/* line 362, ../sass/screen.scss */
+body footer .icons {
+  width: 200px;
+  margin-right: 20px;
+  float: right;
+}
+/* line 367, ../sass/screen.scss */
+body footer .icons a .fa {
+  font-size: 40px;
+  color: #7c88ce;
+  padding: 10px 5px 10px 0px;
+  transition: all 1s linear;
+}
+/* line 372, ../sass/screen.scss */
+body footer .icons a .fa:hover {
+  color: #555555;
+  transform: rotateZ(359deg);
+}

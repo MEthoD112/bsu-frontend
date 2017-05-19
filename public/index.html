@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="utf-8">
@@ -7,10 +8,11 @@
     <title>News Portal</title>
     <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/screen.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
+
 <body>
     <header class="clearfix">
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
@@ -46,10 +48,9 @@
         <button id="cancelfilter" class="cancelfilter">Cancel filter</button>
         <hr>
     </nav>
-    <article>
+    <article class="clearfix">
         <ul class="article" id="article">
-            
-        </ul>    
+        </ul>
         <button id="pagination" class="pagination">Show more news</button>
     </article>
     </div>
@@ -64,29 +65,26 @@
     <div id="new" class="modalDialog">
         <div class="new-box">
             <a href="#close" title="Close" class="close" id="closenew">X</a>
-            <div><p>Add your new</p></div>
+            <div>
+                <p>Add your new</p>
+            </div>
             <form action="">
-            <span class="insertid">Insert id</span>
-            <input class="newid" id="newid" type="text" placeholder="Insert id of the new here">
-
-            <span class="inserttitle">Insert title</span>
-            <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here">
-
-            <span class="insertsummary">Insert short summary</span>
-            <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here">
-
-            <span class="insertcontent">Insert content of the new</span>
-            <textarea class="newcontent" id="newcontent" type="text">Insert here the content of the new</textarea>
-
-            <span class="inserttags">Select tags</span>
-            <select class="selecttags" id="selecttags" multiple="multiple">
-            </select>
-            <p class="imageform">
-                Загрузите картинку не более 60 килобайт
-               <input type="file" id="image" accept="image/jpeg,image/png">
-            </p>
-           
-            <button class="newbutton" id="newbutton">Add New</button>
+                <span class="insertid">Insert id</span>
+                <input class="newid" id="newid" type="text" placeholder="Insert id of the new here">
+                <span class="inserttitle">Insert title</span>
+                <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here">
+                <span class="insertsummary">Insert short summary</span>
+                <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here">
+                <span class="insertcontent">Insert content of the new</span>
+                <textarea class="newcontent" id="newcontent" type="text">Insert here the content of the new</textarea>
+                <span class="inserttags">Select tags</span>
+                <select class="selecttags" id="selecttags" multiple="multiple">
+                </select>
+                <p class="imageform">
+                    Load image
+                    <input type="file" id="image" accept="image/jpeg,image/png">
+                </p>
+                <button class="newbutton" id="newbutton">Add New</button>
             </form>
         </div>
     </div>
@@ -102,16 +100,15 @@
         </div>
     </div>
     <div id="editnew" class="modalDialog">
-            <div class="new-box">
-                <a href="#close" title="Close" class="close" id="closeedit">X</a>
-
-                <div><p>Edit new</p></div>
-
-                <span class="insertid">Id</span>
-                <input class="editid" id="editid" type="text" disabled="disabled">
-
-                <span class="inserttitle">Change title</span>
-                <input class="edittitle" id="edittitle" type="text"">
+        <div class="new-box">
+            <a href="#close" title="Close" class="close" id="closeedit">X</a>
+            <div>
+                <p>Edit new</p>
+            </div>
+            <span class="insertid">Id</span>
+            <input class="editid" id="editid" type="text" disabled="disabled">
+            <span class="inserttitle">Change title</span>
+            <input class="edittitle" id="edittitle" type="text">
 
                 <span class="insertsummary">Change short summary</span>
                 <input class="editsummary" id="editsummary" type="text">
@@ -143,20 +140,12 @@
         <span id="date">Date</span>
         <div class="icons">
                 <a class="icons__link" target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook-official"></i></a>
-                <a class="icons__link" target="_blank" href="http://www.vk.com"><i class="fa fa-vk"></i></a>
+                <a class="icons__link" target="_blank" href="http://www.vk.com"><i class="fa fa-vk "></i></a>
                 <a class="icons__link" target="_blank" href="http://www.twitter.com"><i class="fa fa-twitter"></i></a>
                 <a class="icons__link" target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube"></i></a>
             </div>
     </footer>
-
-    <script src='js/articleservice.js'></script>
-    <script src='js/domservice.js'></script>
-    <script src='js/user.js'></script>
-    <script src='js/images.js'></script>
-    <script src='js/portal.js'></script>
-    <script src='js/app.js'></script>
-    <script src='js/watch.js'></script>
-
+    <script src='build.js'></script>
 </body>
 
 </html>

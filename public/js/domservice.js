@@ -1,6 +1,7 @@
-class DomService {
-    constructor() {
+import { articlesService } from './app';
 
+export default class DomService {
+    constructor() {
         this.ul = document.getElementById('article');
         this.signup = document.getElementById('signup');
         this.addnew = document.getElementById('addnew');
@@ -19,55 +20,29 @@ class DomService {
     }
 
     displayNews(articles) {
-
         articles.forEach((item) => {
-            const li = document.createElement('li');
-            const h2 = document.createElement('h2');
-            const p = document.createElement('p');
-            const span = document.createElement('span');
-            const span1 = span.cloneNode(true);
-            const span2 = span.cloneNode(true);
-            const a = document.createElement('a');
-            const a1 = a.cloneNode(true);
-            const button = document.createElement('button');
-            const img = document.createElement('img');
-            img.style.width = '100%';
-            img.height = 200;
-
-
-            li.setAttribute('data-id', item.id);
-
             const link = articlesService.getImage(item.id);
-            link ? img.src = link.image : img.style.display = 'none';
-            h2.innerHTML = item.title;
-            p.innerHTML = item.summary;
-            span.innerHTML = item.createdAt.toDateString();
-            span.setAttribute('class', 'datearticle');
-            span1.innerHTML = 'Author: ' + item.author;
-            span1.setAttribute('class', 'authorclass');
-            span2.innerHTML = 'Tags: ' + item.tags;
-            span2.setAttribute('class', 'settags')
-            a.innerHTML = 'Read';
-            a.setAttribute('class', 'readnew')
-            a.href = '#readnew';
-            a1.setAttribute('class', 'edit ed');
+            const linkImage = link ? link.image : '#';
+            const date = item.createdAt.toDateString();
+            const author = 'Author: ' + item.author;
+            const tags = 'Tags: ' + item.tags;
 
-            a1.innerHTML = 'Edit';
-            a1.href = '#editnew';
-            button.setAttribute('class', 'delete del');
-            button.id = 'deletearticle'
-            button.innerHTML = 'Delete';
+            const domString =
+                `<li data-id="${item.id}">` +
+                    '<div>' +
+                        `<img src="${linkImage}" alt="Here must be image">` +
+                    '</div>' +
+                    `<h2>${item.title}</h2>` +
+                    `<p>${item.summary}</p>` +
+                    `<span class="datearticle">${date}</span>` +
+                    `<span class="authorclass">${author}</span>` +
+                    `<span class="settags">${tags}</span>` +
+                    '<a href="#readnew" class="readnew">Read</a>' +
+                    '<a href="#editnew" class="edit ed">Edit</a>' +
+                    '<button id="deletearticle" class="delete del">Delete</button>' +
+                '</li>';
 
-            li.appendChild(img);
-            li.appendChild(h2);
-            li.appendChild(p);
-            li.appendChild(span);
-            li.appendChild(span1);
-            li.appendChild(span2);
-            li.appendChild(a);
-            li.appendChild(a1);
-            li.appendChild(button);
-            this.ul.appendChild(li);
+            this.ul.insertAdjacentHTML('beforeend', domString);
         });
     }
 
@@ -122,7 +97,7 @@ class DomService {
 
         const selected = [...this.tagsForEdit.querySelectorAll('option')];
 
-        selected.forEach((item) =>{
+        selected.forEach((item) => {
             this.tagsForEdit.removeChild(item);
         });
 
@@ -144,12 +119,11 @@ class DomService {
     }
 
     editNew(article) {
-        //console.log(article);
         const Article = articlesService.getArticle(article.id);
 
         const li = [...this.ul.getElementsByTagName('li')];
         const selected = this.getSelection(this.tagsForEdit);
-        
+
         li.forEach((item) => {
             if (item.getAttribute('data-id') === article.id) {
 
@@ -164,8 +138,7 @@ class DomService {
                     img.style.display = 'block';
                 } else {
                     img.style.display = 'none';
-                } 
-
+                }
                 h2.innerHTML = article.title;
                 p.innerHTML = article.summary;
                 span.innerHTML = 'Tags :' + article.tags.join(',');
@@ -309,8 +282,6 @@ class DomService {
             articles = articles || articlesService.getArticles();
             length = articlesService.getArticles().length;
         }
-        
-
         if (articles.length < 6 || newsCount === length) {
             pagin.classList.add('pagination-view');
             return;
@@ -323,16 +294,20 @@ class DomService {
     paginatNews() {
         const newsCount = document.getElementById('article').querySelectorAll('li').length;
         const articles = articlesService.getArticles();
+        const news = articlesService.getArticles(newsCount, this.articlesForPage);
+
         if (articlesService.articlesStorage) {
-            this.displayNews(articlesService.articlesStorage.slice(newsCount, this.articlesForPage));
+            const storage = articlesService.articlesStorage;
+            const newsFromStorage = storage.slice(newsCount, this.articlesForPage)
+            this.displayNews(newsFromStorage);
         } else {
-            this.displayNews(articlesService.getArticles(newsCount, this.articlesForPage));
+            this.displayNews(news);
         }
         this.articlesForPage += 6;
 
         this.showPaginationButton();
 
-        if (articlesService.articlesStorage && newsCount + 6 >= articlesService.articlesStorage.length) {
+        if (articlesService.articlesStorage && newsCount + 6 >= storage.length) {
             articlesService.articlesStorage = null;
         }
     }

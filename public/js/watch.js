@@ -1,5 +1,3 @@
-const dateElement = document.getElementById('date');
-
 class Clock {
     constructor(hours, minutes, seconds) {
         hours < 10 ? this.hours = `0${hours}` : this.hours = hours;
@@ -10,7 +8,7 @@ class Clock {
 
     update() {
         const clock = new Clock(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds());
-
+        const dateElement = document.getElementById('date');
         dateElement.innerHTML = clock.now;
 
         return setTimeout(clock.update, 1000);

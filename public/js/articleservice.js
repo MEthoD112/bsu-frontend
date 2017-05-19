@@ -1,6 +1,7 @@
-class ArticlesService {
-    constructor() {
+import { portal } from './app';
 
+export default class ArticlesService {
+    constructor() {
         document.addEventListener('DOMContentLoaded', () => {
             const promiseArticle = new Promise((resolve, reject) => {
                 const oReq = new XMLHttpRequest();
@@ -8,7 +9,7 @@ class ArticlesService {
                 oReq.open('GET', '/articles');
 
                 oReq.addEventListener('load', () => {
-                    resolve(oReq.responseText)
+                    resolve(oReq.responseText);
                 });
 
                 oReq.send();
@@ -122,13 +123,6 @@ class ArticlesService {
 
             return false;
         }
-
-        /*if (article.tags.every((item) => {
-                return this.tags.indexOf(item) === -1; })) {
-
-            console.log(2);
-            return false;
-        } */
 
         if (typeof article.id === 'string' &&
             !isNaN(+article.id) &&

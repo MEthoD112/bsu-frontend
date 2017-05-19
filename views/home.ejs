@@ -7,12 +7,11 @@
     <title>News Portal</title>
     <link rel="shortcut icon" href="img/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/screen.css">
     <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="css/font-awesome.min.css">
 </head>
 <body>
-
     <header class="clearfix">
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
         <% if (user) { %>
@@ -22,7 +21,6 @@
         <p>“I cannot tell a lie.” —George Washington </p>
         <hr>
     </header>
-
     <nav>
         <div>
             <a href="#new" id="addnew">Add New</a>
@@ -51,14 +49,11 @@
         <button id="cancelfilter" class="cancelfilter">Cancel filter</button>
         <hr>
     </nav>
-
     <article class="clearfix">
         <ul class="article" id="article">
-            
         </ul>    
         <button id="pagination" class="pagination">Show more news</button>
     </article>
-
     <div id="tag" class="modalDialog">
         <div class="tag-box">
             <a href="#close" title="Close" class="close" id="closetag">X</a>
@@ -88,7 +83,7 @@
             <select class="selecttags" id="selecttags" multiple="multiple">
             </select>
             <p class="imageform">
-                Загрузите картинку не более 60 килобайт
+                Load image
                <input type="file" id="image" accept="image/jpeg,image/png">
             </p>
            
@@ -128,7 +123,7 @@
                 <span class="inserttags">Change tags</span>
 
                 <select class="selecttags" id="tags-for-edit" multiple="multiple">
-                    
+                   
                 </select>
                 <p class="imageform">Загрузите картинку не более 60 килобайт
                    <input type="file" id="imageforedit" accept="image/jpeg,image/png">
@@ -137,7 +132,6 @@
                 <button class="editbutton" id="editbutton">Edit New</button>
             </div>
     </div>
-
     <footer>
         <hr>
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
@@ -154,14 +148,6 @@
                 <a class="icons__link" target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube"></i></a>
             </div>
     </footer>
-    <script src='js/articleservice.js'></script>
-    <script src='js/domservice.js'></script>
-    <script src='js/user.js'></script>
-    <script src='js/images.js'></script>
-    <script src='js/portal.js'></script>
-    <script src='js/app.js'></script>
-    <script src='js/watch.js'></script>
-
+    <script src='build.js'></script>
 </body>
-
 </html>

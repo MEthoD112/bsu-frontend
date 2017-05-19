@@ -8,7 +8,7 @@ module.exports = (passport) => {
         },
         (req, username, password, done) => {
 
-            findOrCreateUser = function() {
+            findOrCreateUser = () => {
                 // find a user in Mongo with provided username
                 User.findOne({ 'username': username }, (err, user) => {
                     // In case of any error, return using the done method
@@ -30,7 +30,7 @@ module.exports = (passport) => {
                         newUser.password = createHash(password);
 
                         // save the user
-                        newUser.save(function(err) {
+                        newUser.save((err) => {
                             if (err) {
                                 console.log('Error in Saving user: ' + err);
                                 throw err;
@@ -49,6 +49,5 @@ module.exports = (passport) => {
     // Generates hash using bCrypt
     const createHash = (password) => {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-    }
-
-}
+    };
+};
