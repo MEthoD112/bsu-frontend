@@ -9,7 +9,7 @@ const MongoStore = require('connect-mongo')(session);
 const router = express.Router();
 
 // Connect to DB
-mongoose.connect('mongodb://localhost/mongodb');
+mongoose.connect('mongodb://MEthoD:42271112174@ds147421.mlab.com:47421/newsportal');
 
 // Settings of session
 router.use(session({
@@ -18,7 +18,7 @@ router.use(session({
     rolling: true,
     expires: false,
     saveUninitialized: false,
-    store: new MongoStore({ url: 'mongodb://localhost/mongodb' })
+    store: new MongoStore({ url: 'mongodb://MEthoD:42271112174@ds147421.mlab.com:47421/newsportal' })
 }));
 
 router.use(flash());

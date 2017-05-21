@@ -10,4 +10,4 @@ Collective News Portal
  * Express
  * Passport
  * Express-session
- * MongoDB
+ * MongoDB (Online version MongoLab.com)
