@@ -7,6 +7,7 @@ Collective News Portal
  * Airbnb styleguide + lint
  * ES6+
  * Sass
+ * Node.js
  * Express
  * Passport
  * Express-session
