@@ -78,27 +78,34 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.portal = exports.images = exports.user = exports.domService = exports.articlesService = undefined;
 
-var _articleservice = __webpack_require__(5);
+var _articleservice = __webpack_require__(1);
 
 var _articleservice2 = _interopRequireDefault(_articleservice);
 
-var _domservice = __webpack_require__(1);
+var _domservice = __webpack_require__(2);
 
 var _domservice2 = _interopRequireDefault(_domservice);
 
-var _user = __webpack_require__(4);
+var _user = __webpack_require__(5);
 
 var _user2 = _interopRequireDefault(_user);
 
-var _images = __webpack_require__(2);
+var _images = __webpack_require__(3);
 
 var _images2 = _interopRequireDefault(_images);
 
-var _portal = __webpack_require__(3);
+var _portal = __webpack_require__(4);
 
 var _portal2 = _interopRequireDefault(_portal);
 
+var _watch = __webpack_require__(6);
+
+var _watch2 = _interopRequireDefault(_watch);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var clock = new _watch2.default();
+clock.update();
 
 var articlesService = new _articleservice2.default();
 
@@ -118,6 +125,259 @@ exports.portal = portal;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _app = __webpack_require__(0);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ArticlesService = function () {
+    function ArticlesService() {
+        var _this = this;
+
+        _classCallCheck(this, ArticlesService);
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var promiseArticle = new Promise(function (resolve, reject) {
+                var oReq = new XMLHttpRequest();
+
+                oReq.open('GET', '/articles');
+
+                oReq.addEventListener('load', function () {
+                    resolve(oReq.responseText);
+                });
+
+                oReq.send();
+            });
+            promiseArticle.then(function (result) {
+                return _this.articles = JSON.parse(result, function (key, value) {
+                    if (key == 'createdAt') {
+                        return new Date(value);
+                    }
+                    return value;
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var promiseImage = new Promise(function (resolve, reject) {
+                var oReq = new XMLHttpRequest();
+
+                oReq.open('GET', '/images');
+
+                oReq.addEventListener('load', function () {
+                    resolve(_this.images = JSON.parse(oReq.responseText));
+                });
+
+                oReq.send();
+            });
+            promiseImage.then(function (result) {
+                return _app.portal.initApp();
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var promiseTag = new Promise(function (resolve, reject) {
+                var oReq = new XMLHttpRequest();
+
+                oReq.open('GET', '/tags');
+
+                oReq.addEventListener('load', function () {
+
+                    var tags = JSON.parse(oReq.responseText)[0].tags;
+                    tags = tags.join(',');
+                    tags = tags.split(',');
+                    resolve(tags);
+                });
+
+                oReq.send();
+            });
+            promiseTag.then(function (result) {
+                return _this.tags = result;
+            });
+        });
+    }
+
+    _createClass(ArticlesService, [{
+        key: 'getArticles',
+        value: function getArticles(skip, top, filterConfig) {
+            var _this2 = this;
+
+            skip = skip || 0;
+            top = top || this.articles.length;
+            var arr = [];
+
+            this.articles.sort(function (a, b) {
+                if (a.createdAt > b.createdAt) {
+                    return -1;
+                }
+                if (a.createdAt < b.createdAt) {
+                    return 1;
+                }
+            });
+
+            if (filterConfig) {
+
+                if (filterConfig.author) {
+
+                    arr = this.articles.filter(function (item) {
+                        return item.author === filterConfig.author;
+                    });
+
+                    return arr.splice(skip, top);
+                }
+
+                if (filterConfig.tags) {
+                    var _loop = function _loop(j) {
+
+                        var arrNew = _this2.articles.filter(function (item) {
+                            return item.tags.indexOf(filterConfig.tags[j]) !== -1 && arr.indexOf(item) === -1;
+                        });
+
+                        arr = arr.concat(arrNew);
+                    };
+
+                    for (var j = 0; j < filterConfig.tags.length; j++) {
+                        _loop(j);
+                    }
+                    return arr.splice(skip, top);
+                }
+            }
+            return this.articles.slice(skip, top);
+        }
+    }, {
+        key: 'getArticle',
+        value: function getArticle(id) {
+            var _this3 = this;
+
+            this.articles.forEach(function (item) {
+                if (item.id === id) {
+                    _this3.article = item;
+                }
+            });
+            return this.article;
+        }
+    }, {
+        key: 'getImage',
+        value: function getImage(id) {
+            for (var i = 0; i < this.images.length; i++) {
+                if (this.images[i].id == id) {
+                    return this.images[i];
+                }
+            }
+        }
+    }, {
+        key: 'validateArticle',
+        value: function validateArticle(article) {
+            if (!article) {
+                return false;
+            }
+
+            if (this.articles.some(function (item) {
+                return item.id === article.id;
+            })) {
+
+                return false;
+            }
+
+            if (typeof article.id === 'string' && !isNaN(+article.id) && article.id !== '' && typeof article.title === 'string' && typeof article.summary === 'string' && typeof article.author === 'string' && typeof article.content === 'string' && article.createdAt instanceof Date && article.tags instanceof Array && article.tags.length >= 1) {
+
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: 'addArticle',
+        value: function addArticle(article) {
+            if (this.validateArticle(article)) {
+
+                this.articles.push(article);
+                return true;
+            }
+            return false;
+        }
+    }, {
+        key: 'removeArticle',
+        value: function removeArticle(id) {
+            var _this4 = this;
+
+            this.articles.forEach(function (item, i) {
+                if (item.id === id) {
+
+                    _this4.articles.splice(i, 1);
+                    return true;
+                }
+            });
+            return false;
+        }
+    }, {
+        key: 'removeTag',
+        value: function removeTag(tag, id) {
+            var _this5 = this;
+
+            if (this.tags.indexOf(tag) === -1) {
+                throw new Error('Unacceptable tag');
+            }
+
+            var bool = false;
+
+            this.getArticle(id).tags.forEach(function (item, i) {
+                if (item === tag) {
+
+                    bool = true;
+                    _this5.getArticle(id).tags.splice(i, 1);
+                }
+            });
+            return bool;
+        }
+    }, {
+        key: 'getAuthors',
+        value: function getAuthors() {
+            var arr = [];
+
+            this.articles.forEach(function (item) {
+
+                if (arr.indexOf(item.author) === -1) {
+                    arr.push(item.author);
+                }
+            });
+            return arr;
+        }
+    }, {
+        key: 'getTags',
+        value: function getTags() {
+            return this.tags;
+        }
+    }, {
+        key: 'sortArticlesByDate',
+        value: function sortArticlesByDate(start, end) {
+            var arr = [];
+
+            this.articles.map(function (item) {
+                if (start <= item.createdAt && end >= item.createdAt) {
+                    return arr.push(item);
+                }
+            });
+            return arr;
+        }
+    }]);
+
+    return ArticlesService;
+}();
+
+exports.default = ArticlesService;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -471,7 +731,7 @@ var DomService = function () {
 exports.default = DomService;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -570,7 +830,7 @@ var Images = function Images() {
 exports.default = Images;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -972,7 +1232,7 @@ var Portal = function () {
 exports.default = Portal;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1017,7 +1277,7 @@ var User = function User() {
 exports.default = User;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1029,245 +1289,33 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _app = __webpack_require__(0);
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ArticlesService = function () {
-    function ArticlesService() {
-        var _this = this;
+var Clock = function () {
+    function Clock(hours, minutes, seconds) {
+        _classCallCheck(this, Clock);
 
-        _classCallCheck(this, ArticlesService);
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var promiseArticle = new Promise(function (resolve, reject) {
-                var oReq = new XMLHttpRequest();
-
-                oReq.open('GET', '/articles');
-
-                oReq.addEventListener('load', function () {
-                    resolve(oReq.responseText);
-                });
-
-                oReq.send();
-            });
-            promiseArticle.then(function (result) {
-                return _this.articles = JSON.parse(result, function (key, value) {
-                    if (key == 'createdAt') {
-                        return new Date(value);
-                    }
-                    return value;
-                });
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var promiseImage = new Promise(function (resolve, reject) {
-                var oReq = new XMLHttpRequest();
-
-                oReq.open('GET', '/images');
-
-                oReq.addEventListener('load', function () {
-                    resolve(_this.images = JSON.parse(oReq.responseText));
-                });
-
-                oReq.send();
-            });
-            promiseImage.then(function (result) {
-                return _app.portal.initApp();
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            var promiseTag = new Promise(function (resolve, reject) {
-                var oReq = new XMLHttpRequest();
-
-                oReq.open('GET', '/tags');
-
-                oReq.addEventListener('load', function () {
-
-                    var tags = JSON.parse(oReq.responseText)[0].tags;
-                    tags = tags.join(',');
-                    tags = tags.split(',');
-                    resolve(tags);
-                });
-
-                oReq.send();
-            });
-            promiseTag.then(function (result) {
-                return _this.tags = result;
-            });
-        });
+        hours < 10 ? this.hours = '0' + hours : this.hours = hours;
+        minutes < 10 ? this.minutes = '0' + minutes : this.minutes = minutes;
+        seconds < 10 ? this.seconds = '0' + seconds : this.seconds = seconds;
+        this.now = this.hours + ':' + this.minutes + ':' + this.seconds;
     }
 
-    _createClass(ArticlesService, [{
-        key: 'getArticles',
-        value: function getArticles(skip, top, filterConfig) {
-            var _this2 = this;
+    _createClass(Clock, [{
+        key: 'update',
+        value: function update() {
+            var clock = new Clock(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds());
+            var dateElement = document.getElementById('date');
+            dateElement.innerHTML = clock.now;
 
-            skip = skip || 0;
-            top = top || this.articles.length;
-            var arr = [];
-
-            this.articles.sort(function (a, b) {
-                if (a.createdAt > b.createdAt) {
-                    return -1;
-                }
-                if (a.createdAt < b.createdAt) {
-                    return 1;
-                }
-            });
-
-            if (filterConfig) {
-
-                if (filterConfig.author) {
-
-                    arr = this.articles.filter(function (item) {
-                        return item.author === filterConfig.author;
-                    });
-
-                    return arr.splice(skip, top);
-                }
-
-                if (filterConfig.tags) {
-                    var _loop = function _loop(j) {
-
-                        var arrNew = _this2.articles.filter(function (item) {
-                            return item.tags.indexOf(filterConfig.tags[j]) !== -1 && arr.indexOf(item) === -1;
-                        });
-
-                        arr = arr.concat(arrNew);
-                    };
-
-                    for (var j = 0; j < filterConfig.tags.length; j++) {
-                        _loop(j);
-                    }
-                    return arr.splice(skip, top);
-                }
-            }
-            return this.articles.slice(skip, top);
-        }
-    }, {
-        key: 'getArticle',
-        value: function getArticle(id) {
-            var _this3 = this;
-
-            this.articles.forEach(function (item) {
-                if (item.id === id) {
-                    _this3.article = item;
-                }
-            });
-            return this.article;
-        }
-    }, {
-        key: 'getImage',
-        value: function getImage(id) {
-            for (var i = 0; i < this.images.length; i++) {
-                if (this.images[i].id == id) {
-                    return this.images[i];
-                }
-            }
-        }
-    }, {
-        key: 'validateArticle',
-        value: function validateArticle(article) {
-            if (!article) {
-                return false;
-            }
-
-            if (this.articles.some(function (item) {
-                return item.id === article.id;
-            })) {
-
-                return false;
-            }
-
-            if (typeof article.id === 'string' && !isNaN(+article.id) && article.id !== '' && typeof article.title === 'string' && typeof article.summary === 'string' && typeof article.author === 'string' && typeof article.content === 'string' && article.createdAt instanceof Date && article.tags instanceof Array && article.tags.length >= 1) {
-
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: 'addArticle',
-        value: function addArticle(article) {
-            if (this.validateArticle(article)) {
-
-                this.articles.push(article);
-                return true;
-            }
-            return false;
-        }
-    }, {
-        key: 'removeArticle',
-        value: function removeArticle(id) {
-            var _this4 = this;
-
-            this.articles.forEach(function (item, i) {
-                if (item.id === id) {
-
-                    _this4.articles.splice(i, 1);
-                    return true;
-                }
-            });
-            return false;
-        }
-    }, {
-        key: 'removeTag',
-        value: function removeTag(tag, id) {
-            var _this5 = this;
-
-            if (this.tags.indexOf(tag) === -1) {
-                throw new Error('Unacceptable tag');
-            }
-
-            var bool = false;
-
-            this.getArticle(id).tags.forEach(function (item, i) {
-                if (item === tag) {
-
-                    bool = true;
-                    _this5.getArticle(id).tags.splice(i, 1);
-                }
-            });
-            return bool;
-        }
-    }, {
-        key: 'getAuthors',
-        value: function getAuthors() {
-            var arr = [];
-
-            this.articles.forEach(function (item) {
-
-                if (arr.indexOf(item.author) === -1) {
-                    arr.push(item.author);
-                }
-            });
-            return arr;
-        }
-    }, {
-        key: 'getTags',
-        value: function getTags() {
-            return this.tags;
-        }
-    }, {
-        key: 'sortArticlesByDate',
-        value: function sortArticlesByDate(start, end) {
-            var arr = [];
-
-            this.articles.map(function (item) {
-                if (start <= item.createdAt && end >= item.createdAt) {
-                    return arr.push(item);
-                }
-            });
-            return arr;
+            return setTimeout(clock.update, 1000);
         }
     }]);
 
-    return ArticlesService;
+    return Clock;
 }();
 
-exports.default = ArticlesService;
+exports.default = Clock;
 
 /***/ })
 /******/ ]);

@@ -1,4 +1,4 @@
-class Clock {
+export default class Clock {
     constructor(hours, minutes, seconds) {
         hours < 10 ? this.hours = `0${hours}` : this.hours = hours;
         minutes < 10 ? this.minutes = `0${minutes}` : this.minutes = minutes;
@@ -14,6 +14,3 @@ class Clock {
         return setTimeout(clock.update, 1000);
     }
 }
-
-const clock = new Clock();
-clock.update();

@@ -3,6 +3,10 @@ import DomService from './domservice';
 import User from './user';
 import Images from './images';
 import Portal from './portal';
+import Clock from './watch';
+
+const clock = new Clock();
+clock.update();
 
 const articlesService = new ArticlesService();
 
