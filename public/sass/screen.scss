@@ -57,6 +57,18 @@ body {
             display: inline-block;
             font-weight: bold;
             font-family: 'Indie Flower', cursive;
+            @media screen and (max-width: 1150px) {
+                font-size: 18px;
+                margin-bottom:55px;
+            }
+            @media screen and (max-width: 790px) {
+                display: none;
+            }
+        }
+        hr {
+            @media screen and (max-width: 790px) {
+                display: none;
+            }
         }
 
     }
@@ -68,10 +80,35 @@ body {
         clear: both;
     }
     nav {
-        float: left;
+        position: fixed;
+        top: 150px;
         display: inline-block;
         width: 200px;
-        text-align: center;
+        text-align: left;
+        z-index: 5;
+        ul {
+            padding:0px;
+            margin-left: -39px;
+            li {
+                &:hover > ul{display: block;}
+                .navig {
+                    transform: rotate(-90deg);
+                    outline: none;
+                }
+                ul {
+                    display: none;
+                    background: #fff;
+                    position: absolute; 
+                    top: -40px;
+                    left: 70px;
+                    box-shadow: -3px 3px 10px -2px rgba(0,0,0,.3);
+                    border: 1px solid rgba(0,0,0,.6);
+                    li {
+                        text-align: center;
+                    }
+                }
+            }
+        }
         button, a {
         	@include font(20px, center, 10px auto 20px);
             display: inline-block;
@@ -98,14 +135,28 @@ body {
             width: 150px;
         }
         .filtertag {
-        	@include size(200px, 210px);
+        	@include size(200px, 80px);
         }
         .startdate {
             margin-top: 10px;
         }
     }
     article {
-        margin-left: 200px;
+        &:after {
+            content: "";
+            display: block;
+            clear:  both;
+        }
+        @media screen and (max-width: 1070px) {
+                padding-bottom: 230px;
+            }
+        @media screen and (max-width: 530px) {
+            padding-bottom: 330px;
+        }
+        position: relative;
+        z-index: 1;
+        margin: 0 auto;
+        width: 98%;
         text-align: center;
         padding-bottom: 140px;
         li {
@@ -116,6 +167,13 @@ body {
             vertical-align: top;
             box-sizing: border-box;
             background: #f3f3f3;
+            overflow: hidden;
+            @media screen and (max-width: 1056px) {
+                @include size(45%, 400px);
+            }
+            @media screen and (max-width: 725px) {
+                @include size(95%, 400px);
+            }
             &:hover {
                 box-shadow: 0px 0px 3px;
             }

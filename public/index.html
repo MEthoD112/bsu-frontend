@@ -20,33 +20,41 @@
         <p>“I cannot tell a lie.” —George Washington </p>
         <hr>
     </header>
-    <nav>
-        <div>
-            <a href="#new" id="addnew">Add New</a>
-            <a href="#tag" id="addtag">Add Tag</a>
-        </div>
-        <hr>
-        <div>
-            <label for="filterauthor">Sort By Author</label>
-            <select id="filterauthor"></select>
-            <button id="applayauthor">Apply</button>
-        </div>
-        <hr>
-        <div>
-            <label for="filtertag">Sort By Tag</label>
-            <select id="filtertag" multiple="multiple" class='filtertag'></select>
-            <button id="applaytag">Apply</button>
-        </div>
-        <hr>
-        <div>
-            <label for="startdate">Sort By Date</label>
-            <input id="startdate" type="date" class="startdate">
-            <input id="enddate" type="date">
-            <button id="applaydate">Apply</button>
-        </div>
-        <hr>
-        <button id="cancelfilter" class="cancelfilter">Cancel filter</button>
-        <hr>
+    <nav role="navigation" class="navigation">
+        <ul>
+            <li><a href="#" class="navig">Navigation</a>
+                <ul>
+                    <li>
+                        <div>
+                            <a href="#new" id="addnew">Add New</a>
+                            <a href="#tag" id="addtag">Add Tag</a>
+                        </div>
+                        <hr>
+                        <div>
+                            <label for="filterauthor">Sort By Author</label>
+                            <select id="filterauthor"></select>
+                            <button id="applayauthor">Apply</button>
+                        </div>
+                        <hr>
+                        <div>
+                            <label for="filtertag">Sort By Tag</label>
+                            <select id="filtertag" multiple="multiple" class="filtertag" size="3"></select>
+                            <button id="applaytag">Apply</button>
+                        </div>
+                        <hr>
+                        <div>
+                            <label for="startdate">Sort By Date</label>
+                            <input id="startdate" type="date" class="startdate">
+                            <input id="enddate" type="date">
+                            <button id="applaydate">Apply</button>
+                        </div>
+                        <hr>
+                        <button id="cancelfilter" class="cancelfilter">Cancel filter</button>
+                        <hr>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </nav>
     <article class="clearfix">
         <ul class="article" id="article">
