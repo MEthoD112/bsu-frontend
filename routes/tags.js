@@ -19,7 +19,7 @@ router.post('/posttags', (req, res) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            todo.tags += ', ' + req.body.tag;
+            todo.tags += ',' + req.body.tag;
 
             // Save the updated document back to the database
             todo.save((err, todo) => {

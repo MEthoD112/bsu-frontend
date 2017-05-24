@@ -22,7 +22,7 @@
     </header>
     <nav role="navigation" class="navigation">
         <ul>
-            <li><a href="#" class="navig">Navigation</a>
+            <li><a href="#" class="navig">Navi</a>
                 <ul>
                     <li>
                         <div>
@@ -65,7 +65,7 @@
         <div class="tag-box">
             <a href="#close" title="Close" class="close" id="closetag">X</a>
             <span class="tagtext">Tag</span>
-            <input class="tagfield" id="tagvalue" type="text" placeholder="Insert your tag here">
+            <input class="tagfield" id="tagvalue" type="text" placeholder="Insert your tag here" maxlength="15">
             <button class="tagbutton" id="tagbutton">Save</button>
         </div>
     </div>
@@ -77,13 +77,13 @@
             </div>
             <form action="">
                 <span class="insertid">Id</span>
-                <input class="newid" id="newid" type="text" placeholder="Insert id of the new here">
+                <input class="newid" id="newid" type="text" placeholder="Insert id of the new here" maxlength="6">
                 <span class="inserttitle">Title</span>
-                <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here">
+                <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here" maxlength="70">
                 <span class="insertsummary">Short summary</span>
-                <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here">
+                <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here" maxlength="100">
                 <span class="insertcontent">Content</span>
-                <textarea class="newcontent" id="newcontent" type="text">Insert here the content</textarea>
+                <textarea class="newcontent" id="newcontent" type="text" maxlength="400">Insert here the content</textarea>
                 <span class="inserttags">Tags</span>
                 <select class="selecttags" id="selecttags" multiple="multiple">
                 </select>
@@ -115,13 +115,13 @@
             <span class="insertid">Id</span>
             <input class="editid" id="editid" type="text" disabled="disabled">
             <span class="inserttitle">Title</span>
-            <input class="edittitle" id="edittitle" type="text">
+            <input class="edittitle" id="edittitle" type="text" maxlength="70">
 
                 <span class="insertsummary">Short summary</span>
-                <input class="editsummary" id="editsummary" type="text">
+                <input class="editsummary" id="editsummary" type="text" maxlength="100">
 
                 <span class="insertcontent">Content</span>
-                <textarea class="editcontent" id="editcontent" type="text"></textarea>
+                <textarea class="editcontent" id="editcontent" type="text" maxlength="400"></textarea>
 
                 <span class="inserttags">Tags</span>
 

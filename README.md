@@ -1,4 +1,4 @@
-Collective News Portal
+Responsive Collective News Portal
 
 ### Tech stack:
 

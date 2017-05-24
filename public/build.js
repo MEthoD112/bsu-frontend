@@ -484,7 +484,7 @@ var DomService = function () {
                 var linkImage = link ? link.image : '#';
                 var date = item.createdAt.toDateString();
                 var author = 'Author: ' + item.author;
-                var tags = 'Tags: ' + item.tags;
+                var tags = 'Tags: ' + item.tags.join(', ').slice(0, 50) + '...';
 
                 var domString = '<li data-id="' + item.id + '">' + ('<a href="#readnew" class="link" data-id="' + item.id + '">') + ('<div data-id="' + item.id + '">') + ('<img src="' + linkImage + '" alt="Here must be image">') + '</div>' + ('<h2>' + item.title + '</h2>') + ('<p>' + item.summary + '</p>') + '</a>' + ('<span class="datearticle">' + date + '</span>') + ('<span class="authorclass">' + author + '</span>') + ('<span class="settags">' + tags + '</span>') + '<a href="#readnew" class="readnew">Read</a>' + '<a href="#editnew" class="edit ed">Edit</a>' + '<button id="deletearticle" class="delete del">Delete</button>' + '</li>';
 
@@ -541,8 +541,19 @@ var DomService = function () {
                     second: 'numeric'
                 };
                 date.innerHTML = '<strong>' + 'Date:  ' + '</strong>' + article.createdAt.toLocaleString("en-US", options);
-                tags.innerHTML = '<strong>' + 'Tags:  ' + '</strong>' + article.tags.join(',');
+                tags.innerHTML = '<strong>' + 'Tags:  ' + '</strong>' + article.tags.join(', ').slice(0, 50) + '...';
             }
+        }
+    }, {
+        key: 'clearAddNewWindow',
+        value: function clearAddNewWindow() {
+            document.getElementById('newid').value = '';
+            document.getElementById('newtitle').value = '';
+            document.getElementById('newsummary').value = '';
+            document.getElementById('newcontent').value = '';
+
+            var selecttags = document.getElementById('selecttags');
+            this.clearSelection(selecttags);
         }
     }, {
         key: 'showEditNew',
@@ -606,7 +617,7 @@ var DomService = function () {
                     }
                     h2.innerHTML = article.title;
                     p.innerHTML = article.summary;
-                    span.innerHTML = 'Tags :' + article.tags.join(',');
+                    span.innerHTML = 'Tags :' + article.tags.join(', ').slice(0, 50) + '...';
 
                     Article.title = article.title;
                     Article.summary = article.summary;
@@ -747,6 +758,13 @@ var DomService = function () {
                 }
             }
             return selectedOptions;
+        }
+    }, {
+        key: 'clearSelection',
+        value: function clearSelection(o) {
+            for (var i = 0; i < o.options.length; i++) {
+                o.options[i].selected = false;
+            }
         }
     }, {
         key: 'showPaginationButton',
@@ -1196,10 +1214,10 @@ var Portal = function () {
 		key: 'addNew',
 		value: function addNew(article) {
 			this.newWindow.style.display = 'none';
-
 			_app.articlesService.addArticle(article);
 			var articles = _app.articlesService.getArticles(0, 6);
 			_app.domService.clearNews();
+			_app.domService.clearAddNewWindow();
 			_app.domService.displayNews(articles);
 			_app.domService.showUserItems(_app.user.user);
 			_app.domService.showFilterAuthor();
@@ -1245,7 +1263,6 @@ var Portal = function () {
 			_app.domService.clearNews();
 			var obj = {};
 			obj.tags = tags;
-			_app.domService.clearNews();
 			_app.articlesService.articlesStorage = _app.articlesService.getArticles(0, null, obj);
 			_app.domService.displayNews(_app.articlesService.articlesStorage.slice(0, 6));
 			_app.domService.showUserItems(_app.user.user);
@@ -1283,8 +1300,10 @@ var Portal = function () {
 	}, {
 		key: 'cancelFilter',
 		value: function cancelFilter() {
+			var filtertag = document.getElementById('filtertag');
 			_app.articlesService.articlesStorage = null;
 			_app.domService.clearNews();
+			_app.domService.clearSelection(filtertag);
 			var articles = _app.articlesService.getArticles(0, 6);
 			_app.domService.displayNews(articles);
 			_app.domService.showUserItems(_app.user.user);

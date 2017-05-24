@@ -25,7 +25,7 @@ export default class DomService {
             const linkImage = link ? link.image : '#';
             const date = item.createdAt.toDateString();
             const author = 'Author: ' + item.author;
-            const tags = 'Tags: ' + item.tags;
+            const tags = 'Tags: ' + item.tags.join(', ').slice(0, 50) + '...';
 
             const domString =
                 `<li data-id="${item.id}">` +
@@ -97,8 +97,18 @@ export default class DomService {
                 second: 'numeric'
             };
             date.innerHTML = '<strong>' + 'Date:  ' + '</strong>' + article.createdAt.toLocaleString("en-US", options);
-            tags.innerHTML = '<strong>' + 'Tags:  ' + '</strong>' + article.tags.join(',');
+            tags.innerHTML = '<strong>' + 'Tags:  ' + '</strong>' + article.tags.join(', ').slice(0, 50) + '...';
         }
+    }
+
+    clearAddNewWindow() {
+        document.getElementById('newid').value = '';
+        document.getElementById('newtitle').value = '';
+        document.getElementById('newsummary').value = '';
+        document.getElementById('newcontent').value = '';
+
+        const selecttags = document.getElementById('selecttags');
+        this.clearSelection(selecttags);
     }
 
     showEditNew() {
@@ -158,7 +168,7 @@ export default class DomService {
                 }
                 h2.innerHTML = article.title;
                 p.innerHTML = article.summary;
-                span.innerHTML = 'Tags :' + article.tags.join(',');
+                span.innerHTML = 'Tags :' + article.tags.join(', ').slice(0, 50) + '...';
 
                 Article.title = article.title;
                 Article.summary = article.summary;
@@ -285,6 +295,12 @@ export default class DomService {
             }
         }
         return selectedOptions;
+    }
+
+    clearSelection(o) {
+        for (let i = 0; i < o.options.length; i++) {
+            o.options[i].selected = false;
+        }
     }
 
     showPaginationButton(articles) {

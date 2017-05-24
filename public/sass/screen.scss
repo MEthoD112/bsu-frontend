@@ -85,30 +85,38 @@ body {
     }
     nav {
         position: fixed;
-        top: 150px;
+        top: 110px;
+        left: 40px;
         display: inline-block;
         width: 28px;
         text-align: left;
         z-index: 5;
         ul {
+            transition: 1s all linear;
             padding:0px;
             margin-left: -39px;
             li {
-                &:hover > ul{display: block;}
+                &:hover > ul{
+                    transform: translateX(-70px);
+                }
                 .navig {
-                    transform: rotate(-90deg);
                     outline: none;
                 }
                 ul {
-                    display: none;
+                    transform: translateX(-280px);
                     background: #fff;
                     position: absolute; 
-                    top: -40px;
+                    top: 40px;
                     left: 70px;
                     box-shadow: -3px 3px 10px -2px rgba(0,0,0,.3);
                     border: 1px solid rgba(0,0,0,.6);
                     li {
                         text-align: center;
+                        div {
+                            a {
+                                width: 105px;
+                            }
+                        }
                     }
                 }
             }
@@ -126,6 +134,7 @@ body {
             }
         }
         a {
+            width: 55px;
             text-decoration: none;
         }
         label {

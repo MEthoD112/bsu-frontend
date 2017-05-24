@@ -250,10 +250,10 @@ export default class Portal {
 
 	addNew(article) {
 		this.newWindow.style.display = 'none';
-
 		articlesService.addArticle(article);
 		const articles = articlesService.getArticles(0, 6);
 		domService.clearNews();
+		domService.clearAddNewWindow();
 		domService.displayNews(articles);
 		domService.showUserItems(user.user);
 		domService.showFilterAuthor();
@@ -294,7 +294,6 @@ export default class Portal {
 		domService.clearNews();
 		const obj = {};
 		obj.tags = tags;
-		domService.clearNews();
 		articlesService.articlesStorage = articlesService.getArticles(0, null, obj);
 		domService.displayNews(articlesService.articlesStorage.slice(0, 6));
 		domService.showUserItems(user.user);
@@ -329,8 +328,10 @@ export default class Portal {
 	}
 
 	cancelFilter() {
+		const filtertag = document.getElementById('filtertag');
 		articlesService.articlesStorage = null;
 		domService.clearNews();
+		domService.clearSelection(filtertag);
 		const articles = articlesService.getArticles(0, 6);
 		domService.displayNews(articles);
 		domService.showUserItems(user.user);
