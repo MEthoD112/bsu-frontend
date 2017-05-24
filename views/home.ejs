@@ -27,7 +27,7 @@
                 <ul>
                     <li>
                         <div>
-                            <a href="#new" id="addnew">Add New</a>
+                            <a href="#new" id="addnew">Add Article</a>
                             <a href="#tag" id="addtag">Add Tag</a>
                         </div>
                         <hr>
@@ -51,7 +51,6 @@
                         </div>
                         <hr>
                         <button id="cancelfilter" class="cancelfilter">Cancel filter</button>
-                        <hr>
                     </li>
                 </ul>
             </li>
@@ -65,29 +64,29 @@
     <div id="tag" class="modalDialog">
         <div class="tag-box">
             <a href="#close" title="Close" class="close" id="closetag">X</a>
-            <span class="tagtext">Insert tag</span>
+            <span class="tagtext">Tag</span>
             <input class="tagfield" id="tagvalue" type="text" placeholder="Insert your tag here">
-            <button class="tagbutton" id="tagbutton">Add Tag</button>
+            <button class="tagbutton" id="tagbutton">Save</button>
         </div>
     </div>
     <div id="new" class="modalDialog">
         <div class="new-box">
             <a href="#close" title="Close" class="close" id="closenew">X</a>
-            <div><p>Add your new</p></div>
+            <div><p>Add article</p></div>
             <form action="">
-            <span class="insertid">Insert id</span>
+            <span class="insertid">Id</span>
             <input class="newid" id="newid" type="text" placeholder="Insert id of the new here">
 
-            <span class="inserttitle">Insert title</span>
+            <span class="inserttitle">Title</span>
             <input class="newtitle" id="newtitle" type="text" placeholder="Insert title of the new here">
 
-            <span class="insertsummary">Insert short summary</span>
+            <span class="insertsummary">Short summary</span>
             <input class="newsummary" id="newsummary" type="text" placeholder="Insert summary of the new here">
 
-            <span class="insertcontent">Insert content of the new</span>
-            <textarea class="newcontent" id="newcontent" type="text">Insert here the content of the new</textarea>
+            <span class="insertcontent">Content</span>
+            <textarea class="newcontent" id="newcontent" type="text">Insert here the content</textarea>
 
-            <span class="inserttags">Select tags</span>
+            <span class="inserttags">Tags</span>
             <select class="selecttags" id="selecttags" multiple="multiple">
             </select>
             <p class="imageform">
@@ -95,7 +94,7 @@
                <input type="file" id="image" accept="image/jpeg,image/png">
             </p>
            
-            <button class="newbutton" id="newbutton">Add New</button>
+            <button class="newbutton" id="newbutton">Save</button>
             </form>
         </div>
     </div>
@@ -111,41 +110,40 @@
         </div>
     </div>
     <div id="editnew" class="modalDialog">
-            <div class="new-box">
-                <a href="#close" title="Close" class="close" id="closeedit">X</a>
+        <div class="new-box">
+            <a href="#close" title="Close" class="close" id="closeedit">X</a>
+            <div>
+                <p>Edit</p>
+            </div>
+            <span class="insertid">Id</span>
+            <input class="editid" id="editid" type="text" disabled="disabled">
+            <span class="inserttitle">Title</span>
+            <input class="edittitle" id="edittitle" type="text">
 
-                <div><p>Edit new</p></div>
-
-                <span class="insertid">Id</span>
-                <input class="editid" id="editid" type="text" disabled="disabled">
-
-                <span class="inserttitle">Change title</span>
-                <input class="edittitle" id="edittitle" type="text"">
-
-                <span class="insertsummary">Change short summary</span>
+                <span class="insertsummary">Short summary</span>
                 <input class="editsummary" id="editsummary" type="text">
 
-                <span class="insertcontent">Change content of the new</span>
+                <span class="insertcontent">Content</span>
                 <textarea class="editcontent" id="editcontent" type="text"></textarea>
 
-                <span class="inserttags">Change tags</span>
+                <span class="inserttags">Tags</span>
 
                 <select class="selecttags" id="tags-for-edit" multiple="multiple">
-                   
+                    
                 </select>
-                <p class="imageform">Загрузите картинку не более 60 килобайт
+                <p class="imageform">Load image
                    <input type="file" id="imageforedit" accept="image/jpeg,image/png">
                 </p>
                 
-                <button class="editbutton" id="editbutton">Edit New</button>
+                <button class="editbutton" id="editbutton">Save</button>
             </div>
     </div>
     <footer>
         <hr>
         <img width="180" height="90" src="img/logo.png" alt="here must be a image">
         <div>
-        <p>email: mileshko.vitaly@gmail.com</p>
-        <p>mobile: +375297777682</p>
+            <p>email: <a href="mailto:mileshko.vitaly@gmail.com">mileshko.vitaly@gmail.com</a></p>
+            <p>mobile: <a href="tel:+375297777682">+375297777682</a></p>
         </div>
         <span>&copy; Vitaliy Mileshko.</span>
         <span id="date">Date</span>

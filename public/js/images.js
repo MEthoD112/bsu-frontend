@@ -1,9 +1,15 @@
-import { articlesService } from './app';
+import { articlesService, portal } from './app';
 
 export default class Images {
 	constructor() {
 		document.getElementById('newbutton').addEventListener('click', () => {
 			const promiseImage = new Promise((resolve, reject) => {
+				const article = portal.createNew();
+
+				if (!articlesService.validateImage(article, event.target.className)) {
+					return;
+				}
+
 				const oReq = new XMLHttpRequest();
 
 				oReq.open('POST', '/addfoto');
@@ -40,6 +46,12 @@ export default class Images {
 
 		document.getElementById('editbutton').addEventListener('click', () => {
 			const promiseImage = new Promise((resolve, reject) => {
+				const article = portal.createEditedNew();
+
+				if (!articlesService.validateImage(article, event.target.className)) {
+					return;
+				}
+
 				const oReq = new XMLHttpRequest();
 
 				oReq.open('PUT', '/editfoto');

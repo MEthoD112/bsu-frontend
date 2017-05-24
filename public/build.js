@@ -277,33 +277,91 @@ var ArticlesService = function () {
         }
     }, {
         key: 'validateArticle',
-        value: function validateArticle(article) {
+        value: function validateArticle(article, targetClassName) {
             if (!article) {
                 return false;
             }
 
             if (this.articles.some(function (item) {
-                return item.id === article.id;
-            })) {
-
+                return item.id == article.id;
+            }) && targetClassName === 'newbutton') {
+                alert('Such Id already exist');
                 return false;
             }
 
-            if (typeof article.id === 'string' && !isNaN(+article.id) && article.id !== '' && typeof article.title === 'string' && typeof article.summary === 'string' && typeof article.author === 'string' && typeof article.content === 'string' && article.createdAt instanceof Date && article.tags instanceof Array && article.tags.length >= 1) {
+            if (isNaN(+article.id) || article.id === '') {
+                alert('Id must be a number');
+                return false;
+            }
+
+            if (article.title === '') {
+                alert('Title can not be empty');
+                return false;
+            }
+
+            if (article.summary === '') {
+                alert('Summary can not be empty');
+                return false;
+            }
+
+            if (article.content === '') {
+                alert('Content can not be empty');
+                return false;
+            }
+
+            if (article.tags.length <= 0) {
+                alert('At least one tag must be selected');
+                return false;
+            }
+
+            if (typeof article.title === 'string' && typeof article.summary === 'string' && typeof article.author === 'string' && typeof article.content === 'string' && article.createdAt instanceof Date && article.tags instanceof Array) {
 
                 return true;
             }
-            return false;
+        }
+    }, {
+        key: 'validateImage',
+        value: function validateImage(article, targetClassName) {
+            if (!article) {
+                return false;
+            }
+
+            if (this.articles.some(function (item) {
+                return item.id == article.id;
+            }) && targetClassName === 'newbutton') {
+                return false;
+            }
+
+            if (isNaN(+article.id) || article.id === '') {
+                return false;
+            }
+
+            if (article.title === '') {
+                return false;
+            }
+
+            if (article.summary === '') {
+                return false;
+            }
+
+            if (article.content === '') {
+                return false;
+            }
+
+            if (article.tags.length <= 0) {
+                return false;
+            }
+
+            if (typeof article.title === 'string' && typeof article.summary === 'string' && typeof article.author === 'string' && typeof article.content === 'string' && article.createdAt instanceof Date && article.tags instanceof Array) {
+
+                return true;
+            }
         }
     }, {
         key: 'addArticle',
         value: function addArticle(article) {
-            if (this.validateArticle(article)) {
-
-                this.articles.push(article);
-                return true;
-            }
-            return false;
+            this.articles.push(article);
+            return true;
         }
     }, {
         key: 'removeArticle',
@@ -428,7 +486,7 @@ var DomService = function () {
                 var author = 'Author: ' + item.author;
                 var tags = 'Tags: ' + item.tags;
 
-                var domString = '<li data-id="' + item.id + '">' + '<div>' + ('<img src="' + linkImage + '" alt="Here must be image">') + '</div>' + ('<h2>' + item.title + '</h2>') + ('<p>' + item.summary + '</p>') + ('<span class="datearticle">' + date + '</span>') + ('<span class="authorclass">' + author + '</span>') + ('<span class="settags">' + tags + '</span>') + '<a href="#readnew" class="readnew">Read</a>' + '<a href="#editnew" class="edit ed">Edit</a>' + '<button id="deletearticle" class="delete del">Delete</button>' + '</li>';
+                var domString = '<li data-id="' + item.id + '">' + ('<a href="#readnew" class="link" data-id="' + item.id + '">') + ('<div data-id="' + item.id + '">') + ('<img src="' + linkImage + '" alt="Here must be image">') + '</div>' + ('<h2>' + item.title + '</h2>') + ('<p>' + item.summary + '</p>') + '</a>' + ('<span class="datearticle">' + date + '</span>') + ('<span class="authorclass">' + author + '</span>') + ('<span class="settags">' + tags + '</span>') + '<a href="#readnew" class="readnew">Read</a>' + '<a href="#editnew" class="edit ed">Edit</a>' + '<button id="deletearticle" class="delete del">Delete</button>' + '</li>';
 
                 _this.ul.insertAdjacentHTML('beforeend', domString);
             });
@@ -452,28 +510,39 @@ var DomService = function () {
     }, {
         key: 'readNew',
         value: function readNew() {
-            if (event.target.innerHTML !== 'Read') {
-                return;
+            if (event.target.innerHTML === 'Read' || event.target.tagName === 'IMG' || event.target.tagName === 'P' || event.target.tagName === 'H2') {
+
+                var articleNode = event.target.parentElement;
+                var id = articleNode.getAttribute('data-id');
+
+                var article = _app.articlesService.getArticle(id);
+
+                var h2 = document.getElementsByClassName('readtitle')[0];
+                var p = document.getElementsByClassName('readcontent')[0];
+                var author = document.getElementsByClassName('newauthor')[0];
+                var date = document.getElementsByClassName('newdate')[0];
+                var tags = document.getElementsByClassName('newtags')[0];
+                var img = document.getElementsByClassName('readimage')[0];
+
+                h2.innerHTML = article.title;
+                var link = _app.articlesService.getImage(id);
+                link ? img.src = link.image : img.style.display = 'none';
+                p.innerHTML = article.content;
+                author.innerHTML = '<strong>' + 'Author:  ' + '</strong>' + article.author;
+
+                var options = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    weekday: 'long',
+                    timezone: 'UTC',
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    second: 'numeric'
+                };
+                date.innerHTML = '<strong>' + 'Date:  ' + '</strong>' + article.createdAt.toLocaleString("en-US", options);
+                tags.innerHTML = '<strong>' + 'Tags:  ' + '</strong>' + article.tags.join(',');
             }
-            var articleNode = event.target.parentElement;
-            var id = articleNode.getAttribute('data-id');
-
-            var article = _app.articlesService.getArticle(id);
-
-            var h2 = document.getElementsByClassName('readtitle')[0];
-            var p = document.getElementsByClassName('readcontent')[0];
-            var author = document.getElementsByClassName('newauthor')[0];
-            var date = document.getElementsByClassName('newdate')[0];
-            var tags = document.getElementsByClassName('newtags')[0];
-            var img = document.getElementsByClassName('readimage')[0];
-
-            h2.innerHTML = article.title;
-            var link = _app.articlesService.getImage(id);
-            link ? img.src = link.image : img.style.display = 'none';
-            p.innerHTML = article.content;
-            author.innerHTML = 'Author: ' + article.author;
-            date.innerHTML = article.createdAt;
-            tags.innerHTML = 'Tags: ' + article.tags.join(',');
         }
     }, {
         key: 'showEditNew',
@@ -750,6 +819,12 @@ var Images = function Images() {
 
 				document.getElementById('newbutton').addEventListener('click', function () {
 								var promiseImage = new Promise(function (resolve, reject) {
+												var article = _app.portal.createNew();
+
+												if (!_app.articlesService.validateImage(article, event.target.className)) {
+																return;
+												}
+
 												var oReq = new XMLHttpRequest();
 
 												oReq.open('POST', '/addfoto');
@@ -786,6 +861,12 @@ var Images = function Images() {
 
 				document.getElementById('editbutton').addEventListener('click', function () {
 								var promiseImage = new Promise(function (resolve, reject) {
+												var article = _app.portal.createEditedNew();
+
+												if (!_app.articlesService.validateImage(article, event.target.className)) {
+																return;
+												}
+
 												var oReq = new XMLHttpRequest();
 
 												oReq.open('PUT', '/editfoto');
@@ -924,12 +1005,11 @@ var Portal = function () {
 
 				var article = that.createNew();
 
-				var oReq = new XMLHttpRequest();
-
-				if (!_app.articlesService.validateArticle(article)) {
-					alert('your article is not valid');
+				if (!_app.articlesService.validateArticle(article, event.target.className)) {
 					return;
 				}
+
+				var oReq = new XMLHttpRequest();
 
 				oReq.open('POST', '/articles');
 
@@ -1017,6 +1097,10 @@ var Portal = function () {
 		this.editButton.addEventListener('click', function () {
 			var article = _this.createEditedNew();
 			var promiseEditNew = new Promise(function (resolve, reject) {
+				if (!_app.articlesService.validateArticle(article, event.target.className)) {
+					return;
+				}
+
 				var oReq = new XMLHttpRequest();
 
 				oReq.open('PUT', '/editarticle');
@@ -1078,11 +1162,6 @@ var Portal = function () {
 
 			var article = _app.articlesService.getArticle(id);
 
-			if (!edittitle.value || !editsummary.value || !editcontent.value || selected.length < 1) {
-				alert('Unacceptable editions');
-				return;
-			}
-
 			article.title = edittitle.value;
 			article.summary = editsummary.value;
 			article.content = editcontent.value;
@@ -1116,9 +1195,7 @@ var Portal = function () {
 	}, {
 		key: 'addNew',
 		value: function addNew(article) {
-			if (_app.articlesService.addArticle(article)) {
-				this.newWindow.style.display = 'none';
-			}
+			this.newWindow.style.display = 'none';
 
 			_app.articlesService.addArticle(article);
 			var articles = _app.articlesService.getArticles(0, 6);

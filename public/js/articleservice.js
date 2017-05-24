@@ -113,40 +113,99 @@ export default class ArticlesService {
         }
     }
 
-    validateArticle(article) {
+    validateArticle(article, targetClassName) {
         if (!article) {
             return false;
         }
 
         if (this.articles.some((item) => {
-                return item.id === article.id; })) {
-
+                 return item.id == article.id; }) &&
+                 targetClassName === 'newbutton') {
+            alert('Such Id already exist');
             return false;
         }
 
-        if (typeof article.id === 'string' &&
-            !isNaN(+article.id) &&
-            article.id !== '' &&
-            typeof article.title === 'string' &&
+        if (isNaN(+article.id) || article.id === '') {
+            alert('Id must be a number');
+            return false;
+        }
+
+        if (article.title === '') {
+            alert('Title can not be empty');
+            return false;
+        }
+
+        if (article.summary === '') {
+            alert('Summary can not be empty');
+            return false;
+        }
+
+        if (article.content === '') {
+            alert('Content can not be empty');
+            return false;
+        }
+
+        if (article.tags.length <= 0) {
+            alert('At least one tag must be selected');
+            return false;
+        }
+
+        if (typeof article.title === 'string' &&
             typeof article.summary === 'string' &&
             typeof article.author === 'string' &&
             typeof article.content === 'string' &&
             (article.createdAt instanceof Date) &&
-            (article.tags instanceof Array) &&
-            article.tags.length >= 1) {
+            (article.tags instanceof Array)) {
 
             return true;
         }
-        return false;
+    }
+
+    validateImage(article, targetClassName) {
+        if (!article) {
+            return false;
+        }
+
+        if (this.articles.some((item) => {
+                 return item.id == article.id; }) &&
+                 targetClassName === 'newbutton') {
+            return false;
+        }
+
+        if (isNaN(+article.id) || article.id === '') {
+            return false;
+        }
+
+        if (article.title === '') {
+            return false;
+        }
+
+        if (article.summary === '') {
+            return false;
+        }
+
+        if (article.content === '') {
+            return false;
+        }
+
+        if (article.tags.length <= 0) {
+            return false;
+        }
+
+        if (typeof article.title === 'string' &&
+            typeof article.summary === 'string' &&
+            typeof article.author === 'string' &&
+            typeof article.content === 'string' &&
+            (article.createdAt instanceof Date) &&
+            (article.tags instanceof Array)) {
+
+            return true;
+        }
     }
 
     addArticle(article) {
-        if (this.validateArticle(article)) {
-
             this.articles.push(article);
             return true;
-        }
-        return false;
     }
 
     removeArticle(id) {

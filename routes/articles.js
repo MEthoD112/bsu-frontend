@@ -38,13 +38,13 @@ router.put('/editarticle', (req, res) => {
             todo.summary = req.body.summary || todo.summary;
             todo.content = req.body.content || todo.content;
             todo.tags = req.body.tags || todo.tags;
-
+            //console.log(todo);
             // Save the updated document back to the database
             todo.save((err, todo) => {
                 if (err) {
                     res.status(500).send(err);
                 }
-                res.json(todo);
+                res.send(todo);
             });
         }
     });

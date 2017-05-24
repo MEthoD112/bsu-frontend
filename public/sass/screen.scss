@@ -25,6 +25,10 @@ html {
     height: 100%;
 }
 
+li .link {
+    text-decoration: none;
+    cursor: pointer;
+}
 body {
     position: relative;
     max-width: 1440px;
@@ -83,7 +87,7 @@ body {
         position: fixed;
         top: 150px;
         display: inline-block;
-        width: 200px;
+        width: 28px;
         text-align: left;
         z-index: 5;
         ul {
@@ -130,6 +134,7 @@ body {
         }
         select {
             margin-top: 10px;
+            width: 90%;
         }
         .cancelfilter {
             width: 150px;
@@ -193,9 +198,11 @@ body {
             h2 {
             	@include font(18px, left, 0px);
                 padding: 5px 0px 5px 0px;
+                color: #000;
             }
             p {
             	@include font(14px, left, 0px 0px 25px);
+                color: #333333;
             }
             .ed {
                 left: 60px !important;
@@ -205,7 +212,7 @@ body {
                 background: #f3f3f3;
                 border: none;
             }
-            .readnew, .ed, .del, .datearticle, .settags, .authorclass {
+            .readnew, .ed, .del, {
                 display: inline-block;
                 @include position(absolute, 370px, 0px);
                 text-decoration: none;
@@ -215,6 +222,13 @@ body {
                     text-decoration: underline;
                 }
             }
+            .datearticle, .settags, .authorclass {
+                display: inline-block;
+                @include position(absolute, 370px, 0px);
+                text-decoration: none;
+                color: #333333;
+                font-size: 18px;
+            }    
             .datearticle {
             	@include position(absolute, 374px, 190px);
                 font-size: 14px;
@@ -279,7 +293,7 @@ body {
                 }
             }
             .imageform {
-            	@include position(absolute, 620px, 260px);
+            	@include position(absolute, 620px, 300px);
             }
             .pwd {
             	@include position(absolute, 120px, 110px);
@@ -321,14 +335,14 @@ body {
             	@include size(400px, 240px);
             }
             .inserttags {
-            	@include position(absolute, 530px, 60px);
+            	@include position(absolute, 530px, 100px);
             }
             .selecttags {
-            	@include position(absolute, 570px, 28px);
+            	@include position(absolute, 570px, 100px);
             	@include size(190px, 200px);
             }
             .newbutton, .editbutton {
-            	@include position(absolute, 790px, 258px);
+            	@include position(absolute, 790px, 275px);
             }
         }
         .tag-box {
@@ -339,7 +353,7 @@ body {
             border-radius: 10px;
             background: #fff;
             .tagtext {
-            	@include position(absolute, 20px, 117px);
+            	@include position(absolute, 20px, 137px);
                 font-size: 24px;
                 font-weight: bold;
             }
@@ -408,25 +422,38 @@ body {
     footer {
     	@include position-bottom(absolute, 0, 0);
         right: 0;
+        z-index: 2;
         div {
             margin-left: 20px;
             padding-top: 0px;
             width: 320px;
             display: inline-block;
+            p {
+                a {
+                    text-decoration: none;
+                    color: #7c88ce;
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
         }
         span {
             padding-left: 20px;
+            font-style: italic;
         }
         .icons {
             width: 200px;
             margin-right: 20px;
             float: right;
             a {
+                outline: none;
                 .fa {
                     font-size: 40px;
                     color: #7c88ce;
                     padding: 10px 5px 10px 0px;
                     transition: all 1s linear;
+                    outline: none;
                     &:hover {
                         color: #555555;
                         transform: rotateZ(359deg);

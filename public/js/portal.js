@@ -72,12 +72,11 @@ export default class Portal {
 
 				const article = that.createNew();
 
-		        const oReq = new XMLHttpRequest();
-
-				if (!articlesService.validateArticle(article)) {
-					alert('your article is not valid');
+				if (!articlesService.validateArticle(article, event.target.className)) {
 					return;
 				}
+
+		        const oReq = new XMLHttpRequest();
 
 				oReq.open('POST', '/articles');
 
@@ -160,6 +159,10 @@ export default class Portal {
 		this.editButton.addEventListener('click', () => {
 			const article = this.createEditedNew();
 			const promiseEditNew = new Promise((resolve, reject) => {
+				if (!articlesService.validateArticle(article, event.target.className)) {
+					return;
+				}
+
 				const oReq = new XMLHttpRequest();
 
 				oReq.open('PUT', '/editarticle');
@@ -216,11 +219,6 @@ export default class Portal {
 
 		const article = articlesService.getArticle(id);
 
-		if (!edittitle.value || !editsummary.value || !editcontent.value || selected.length < 1) {
-			alert('Unacceptable editions');
-			return;
-		}
-
 		article.title = edittitle.value;
 		article.summary = editsummary.value;
 		article.content = editcontent.value;
@@ -251,9 +249,7 @@ export default class Portal {
 	}
 
 	addNew(article) {
-		if (articlesService.addArticle(article)) {
-			this.newWindow.style.display = 'none';
-		}
+		this.newWindow.style.display = 'none';
 
 		articlesService.addArticle(article);
 		const articles = articlesService.getArticles(0, 6);

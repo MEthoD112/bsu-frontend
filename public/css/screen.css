@@ -4,6 +4,12 @@ html {
 }
 
 /* line 28, ../sass/screen.scss */
+li .link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 32, ../sass/screen.scss */
 body {
   position: relative;
   max-width: 1440px;
@@ -13,16 +19,16 @@ body {
   font-family: 'Roboto', sans-serif;
   color: #333333;
 }
-/* line 36, ../sass/screen.scss */
+/* line 40, ../sass/screen.scss */
 body header {
   width: 100%;
 }
-/* line 38, ../sass/screen.scss */
+/* line 42, ../sass/screen.scss */
 body header img {
   padding: 20px 0px 20px 20px;
   float: left;
 }
-/* line 42, ../sass/screen.scss */
+/* line 46, ../sass/screen.scss */
 body header a {
   float: right;
   color: #ffffff;
@@ -32,12 +38,12 @@ body header a {
   padding: 5px 7px;
   text-decoration: none;
 }
-/* line 50, ../sass/screen.scss */
+/* line 54, ../sass/screen.scss */
 body header a:hover {
   color: #7c88ce;
   background: #ffffff;
 }
-/* line 55, ../sass/screen.scss */
+/* line 59, ../sass/screen.scss */
 body header p {
   font-size: 36px;
   text-align: center;
@@ -47,25 +53,25 @@ body header p {
   font-family: 'Indie Flower', cursive;
 }
 @media screen and (max-width: 1150px) {
-  /* line 55, ../sass/screen.scss */
+  /* line 59, ../sass/screen.scss */
   body header p {
     font-size: 18px;
     margin-bottom: 55px;
   }
 }
 @media screen and (max-width: 790px) {
-  /* line 55, ../sass/screen.scss */
+  /* line 59, ../sass/screen.scss */
   body header p {
     display: none;
   }
 }
 @media screen and (max-width: 790px) {
-  /* line 68, ../sass/screen.scss */
+  /* line 72, ../sass/screen.scss */
   body header hr {
     display: none;
   }
 }
-/* line 75, ../sass/screen.scss */
+/* line 79, ../sass/screen.scss */
 body .clearfix:after {
   content: "";
   visibility: hidden;
@@ -73,30 +79,30 @@ body .clearfix:after {
   height: 0;
   clear: both;
 }
-/* line 82, ../sass/screen.scss */
+/* line 86, ../sass/screen.scss */
 body nav {
   position: fixed;
   top: 150px;
   display: inline-block;
-  width: 200px;
+  width: 28px;
   text-align: left;
   z-index: 5;
 }
-/* line 89, ../sass/screen.scss */
+/* line 93, ../sass/screen.scss */
 body nav ul {
   padding: 0px;
   margin-left: -39px;
 }
-/* line 93, ../sass/screen.scss */
+/* line 97, ../sass/screen.scss */
 body nav ul li:hover > ul {
   display: block;
 }
-/* line 94, ../sass/screen.scss */
+/* line 98, ../sass/screen.scss */
 body nav ul li .navig {
   transform: rotate(-90deg);
   outline: none;
 }
-/* line 98, ../sass/screen.scss */
+/* line 102, ../sass/screen.scss */
 body nav ul li ul {
   display: none;
   background: #fff;
@@ -106,11 +112,11 @@ body nav ul li ul {
   box-shadow: -3px 3px 10px -2px rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(0, 0, 0, 0.6);
 }
-/* line 106, ../sass/screen.scss */
+/* line 110, ../sass/screen.scss */
 body nav ul li ul li {
   text-align: center;
 }
-/* line 112, ../sass/screen.scss */
+/* line 116, ../sass/screen.scss */
 body nav button, body nav a {
   font-size: 20px;
   text-align: center;
@@ -122,37 +128,38 @@ body nav button, body nav a {
   width: 105px;
   border: 1px solid grey;
 }
-/* line 120, ../sass/screen.scss */
+/* line 124, ../sass/screen.scss */
 body nav button:hover, body nav a:hover {
   background: #f3f3f3;
 }
-/* line 124, ../sass/screen.scss */
+/* line 128, ../sass/screen.scss */
 body nav a {
   text-decoration: none;
 }
-/* line 127, ../sass/screen.scss */
+/* line 131, ../sass/screen.scss */
 body nav label {
   font-size: 20px;
   font-weight: bold;
 }
-/* line 131, ../sass/screen.scss */
+/* line 135, ../sass/screen.scss */
 body nav select {
   margin-top: 10px;
+  width: 90%;
 }
-/* line 134, ../sass/screen.scss */
+/* line 139, ../sass/screen.scss */
 body nav .cancelfilter {
   width: 150px;
 }
-/* line 137, ../sass/screen.scss */
+/* line 142, ../sass/screen.scss */
 body nav .filtertag {
   width: 200px;
   height: 80px;
 }
-/* line 140, ../sass/screen.scss */
+/* line 145, ../sass/screen.scss */
 body nav .startdate {
   margin-top: 10px;
 }
-/* line 144, ../sass/screen.scss */
+/* line 149, ../sass/screen.scss */
 body article {
   position: relative;
   z-index: 1;
@@ -161,25 +168,25 @@ body article {
   text-align: center;
   padding-bottom: 140px;
 }
-/* line 145, ../sass/screen.scss */
+/* line 150, ../sass/screen.scss */
 body article:after {
   content: "";
   display: block;
   clear: both;
 }
 @media screen and (max-width: 1070px) {
-  /* line 144, ../sass/screen.scss */
+  /* line 149, ../sass/screen.scss */
   body article {
     padding-bottom: 230px;
   }
 }
 @media screen and (max-width: 530px) {
-  /* line 144, ../sass/screen.scss */
+  /* line 149, ../sass/screen.scss */
   body article {
     padding-bottom: 330px;
   }
 }
-/* line 162, ../sass/screen.scss */
+/* line 167, ../sass/screen.scss */
 body article li {
   width: 30%;
   height: 400px;
@@ -192,65 +199,67 @@ body article li {
   overflow: hidden;
 }
 @media screen and (max-width: 1056px) {
-  /* line 162, ../sass/screen.scss */
+  /* line 167, ../sass/screen.scss */
   body article li {
     width: 45%;
     height: 400px;
   }
 }
 @media screen and (max-width: 725px) {
-  /* line 162, ../sass/screen.scss */
+  /* line 167, ../sass/screen.scss */
   body article li {
     width: 95%;
     height: 400px;
   }
 }
-/* line 177, ../sass/screen.scss */
+/* line 182, ../sass/screen.scss */
 body article li:hover {
   box-shadow: 0px 0px 3px;
 }
-/* line 180, ../sass/screen.scss */
+/* line 185, ../sass/screen.scss */
 body article li div {
   overflow: hidden;
   height: 200px;
 }
-/* line 183, ../sass/screen.scss */
+/* line 188, ../sass/screen.scss */
 body article li div img {
   width: 100%;
   height: 200px;
   filter: grayscale(20%);
   transition: all 1s linear;
 }
-/* line 187, ../sass/screen.scss */
+/* line 192, ../sass/screen.scss */
 body article li div img:hover {
   transform: scale(1.2, 1.2);
   filter: brightness(120%);
 }
-/* line 193, ../sass/screen.scss */
+/* line 198, ../sass/screen.scss */
 body article li h2 {
   font-size: 18px;
   text-align: left;
   margin: 0px;
   padding: 5px 0px 5px 0px;
+  color: #000;
 }
-/* line 197, ../sass/screen.scss */
+/* line 203, ../sass/screen.scss */
 body article li p {
   font-size: 14px;
   text-align: left;
   margin: 0px 0px 25px;
+  color: #333333;
 }
-/* line 200, ../sass/screen.scss */
+/* line 207, ../sass/screen.scss */
 body article li .ed {
   left: 60px !important;
 }
-/* line 203, ../sass/screen.scss */
+/* line 210, ../sass/screen.scss */
 body article li .del {
   left: 105px !important;
   background: #f3f3f3;
   border: none;
 }
-/* line 208, ../sass/screen.scss */
-body article li .readnew, body article li .ed, body article li .del, body article li .datearticle, body article li .settags, body article li .authorclass {
+/* line 215, ../sass/screen.scss */
+body article li .readnew, body article li .ed, body article li .del {
   display: inline-block;
   position: absolute;
   top: 370px;
@@ -259,11 +268,21 @@ body article li .readnew, body article li .ed, body article li .del, body articl
   color: #333333;
   font-size: 18px;
 }
-/* line 214, ../sass/screen.scss */
-body article li .readnew:hover, body article li .ed:hover, body article li .del:hover, body article li .datearticle:hover, body article li .settags:hover, body article li .authorclass:hover {
+/* line 221, ../sass/screen.scss */
+body article li .readnew:hover, body article li .ed:hover, body article li .del:hover {
   text-decoration: underline;
 }
-/* line 218, ../sass/screen.scss */
+/* line 225, ../sass/screen.scss */
+body article li .datearticle, body article li .settags, body article li .authorclass {
+  display: inline-block;
+  position: absolute;
+  top: 370px;
+  left: 0px;
+  text-decoration: none;
+  color: #333333;
+  font-size: 18px;
+}
+/* line 232, ../sass/screen.scss */
 body article li .datearticle {
   position: absolute;
   top: 374px;
@@ -271,7 +290,7 @@ body article li .datearticle {
   font-size: 14px;
   font-style: italic;
 }
-/* line 223, ../sass/screen.scss */
+/* line 237, ../sass/screen.scss */
 body article li .settags {
   position: absolute;
   top: 350px;
@@ -279,7 +298,7 @@ body article li .settags {
   font-size: 14px;
   font-style: italic;
 }
-/* line 228, ../sass/screen.scss */
+/* line 242, ../sass/screen.scss */
 body article li .authorclass {
   position: absolute;
   top: 330px;
@@ -287,11 +306,11 @@ body article li .authorclass {
   font-size: 14px;
   font-style: italic;
 }
-/* line 233, ../sass/screen.scss */
+/* line 247, ../sass/screen.scss */
 body article li .edit, body article li .delete {
   display: none;
 }
-/* line 237, ../sass/screen.scss */
+/* line 251, ../sass/screen.scss */
 body article .pagination {
   display: inline-block;
   margin: 0 auto;
@@ -302,11 +321,11 @@ body article .pagination {
   margin-bottom: 10px;
   outline: none;
 }
-/* line 247, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 body article .pagination-view {
   display: none;
 }
-/* line 251, ../sass/screen.scss */
+/* line 265, ../sass/screen.scss */
 body .modalDialog {
   position: fixed;
   top: 0px;
@@ -322,12 +341,12 @@ body .modalDialog {
   min-width: 320px;
   pointer-events: none;
 }
-/* line 263, ../sass/screen.scss */
+/* line 277, ../sass/screen.scss */
 body .modalDialog:target {
   display: block;
   pointer-events: auto;
 }
-/* line 268, ../sass/screen.scss */
+/* line 282, ../sass/screen.scss */
 body .modalDialog div .close {
   float: right;
   font-size: 21px;
@@ -338,85 +357,85 @@ body .modalDialog div .close {
   filter: alpha(opacity=20);
   opacity: .2;
 }
-/* line 277, ../sass/screen.scss */
+/* line 291, ../sass/screen.scss */
 body .modalDialog div .close:hover {
   text-decoration: none;
 }
-/* line 281, ../sass/screen.scss */
+/* line 295, ../sass/screen.scss */
 body .modalDialog div .imageform {
   position: absolute;
   top: 620px;
-  left: 260px;
+  left: 300px;
 }
-/* line 284, ../sass/screen.scss */
+/* line 298, ../sass/screen.scss */
 body .modalDialog div .pwd {
   position: absolute;
   top: 120px;
   left: 110px;
 }
-/* line 287, ../sass/screen.scss */
+/* line 301, ../sass/screen.scss */
 body .modalDialog div .loginfield {
   position: absolute;
   top: 59px;
   left: 46px;
 }
-/* line 290, ../sass/screen.scss */
+/* line 304, ../sass/screen.scss */
 body .modalDialog div .inppwd {
   position: absolute;
   top: 160px;
   left: 46px;
 }
-/* line 293, ../sass/screen.scss */
+/* line 307, ../sass/screen.scss */
 body .modalDialog div .signoutbutton {
   position: absolute;
   top: 230px;
   left: 170px;
 }
-/* line 296, ../sass/screen.scss */
+/* line 310, ../sass/screen.scss */
 body .modalDialog div .signbutton {
   position: absolute;
   top: 230px;
   left: 80px;
 }
-/* line 299, ../sass/screen.scss */
+/* line 313, ../sass/screen.scss */
 body .modalDialog div .insertid {
   position: absolute;
   top: 35px;
   left: 100px;
 }
-/* line 302, ../sass/screen.scss */
+/* line 316, ../sass/screen.scss */
 body .modalDialog div .newid, body .modalDialog div .editid {
   position: absolute;
   top: 60px;
   left: 100px;
 }
-/* line 305, ../sass/screen.scss */
+/* line 319, ../sass/screen.scss */
 body .modalDialog div .inserttitle {
   position: absolute;
   top: 95px;
   left: 100px;
 }
-/* line 308, ../sass/screen.scss */
+/* line 322, ../sass/screen.scss */
 body .modalDialog div .newtitle, body .modalDialog div .edittitle {
   position: absolute;
   top: 120px;
   left: 100px;
   width: 400px;
 }
-/* line 312, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 body .modalDialog div .newsummary, body .modalDialog div .editsummary {
   position: absolute;
   top: 185px;
   left: 100px;
   width: 400px;
 }
-/* line 316, ../sass/screen.scss */
+/* line 330, ../sass/screen.scss */
 body .modalDialog div .insertcontent {
   position: absolute;
   top: 224px;
   left: 100px;
 }
-/* line 319, ../sass/screen.scss */
+/* line 333, ../sass/screen.scss */
 body .modalDialog div .newcontent, body .modalDialog div .editcontent {
   position: absolute;
   top: 260px;
@@ -424,27 +443,27 @@ body .modalDialog div .newcontent, body .modalDialog div .editcontent {
   width: 400px;
   height: 240px;
 }
-/* line 323, ../sass/screen.scss */
+/* line 337, ../sass/screen.scss */
 body .modalDialog div .inserttags {
   position: absolute;
   top: 530px;
-  left: 60px;
+  left: 100px;
 }
-/* line 326, ../sass/screen.scss */
+/* line 340, ../sass/screen.scss */
 body .modalDialog div .selecttags {
   position: absolute;
   top: 570px;
-  left: 28px;
+  left: 100px;
   width: 190px;
   height: 200px;
 }
-/* line 330, ../sass/screen.scss */
+/* line 344, ../sass/screen.scss */
 body .modalDialog div .newbutton, body .modalDialog div .editbutton {
   position: absolute;
   top: 790px;
-  left: 258px;
+  left: 275px;
 }
-/* line 334, ../sass/screen.scss */
+/* line 348, ../sass/screen.scss */
 body .modalDialog .tag-box {
   width: 300px;
   height: 180px;
@@ -454,27 +473,27 @@ body .modalDialog .tag-box {
   border-radius: 10px;
   background: #fff;
 }
-/* line 341, ../sass/screen.scss */
+/* line 355, ../sass/screen.scss */
 body .modalDialog .tag-box .tagtext {
   position: absolute;
   top: 20px;
-  left: 117px;
+  left: 137px;
   font-size: 24px;
   font-weight: bold;
 }
-/* line 346, ../sass/screen.scss */
+/* line 360, ../sass/screen.scss */
 body .modalDialog .tag-box .tagfield {
   position: absolute;
   top: 59px;
   left: 46px;
 }
-/* line 349, ../sass/screen.scss */
+/* line 363, ../sass/screen.scss */
 body .modalDialog .tag-box .tagbutton {
   position: absolute;
   top: 127px;
   left: 126px;
 }
-/* line 353, ../sass/screen.scss */
+/* line 367, ../sass/screen.scss */
 body .modalDialog .new-box {
   width: 600px;
   height: 820px;
@@ -484,32 +503,32 @@ body .modalDialog .new-box {
   border-radius: 10px;
   background: #fff;
 }
-/* line 361, ../sass/screen.scss */
+/* line 375, ../sass/screen.scss */
 body .modalDialog .new-box div p {
   font-size: 24px;
   text-align: center;
   margin: 0;
   font-weight: bold;
 }
-/* line 366, ../sass/screen.scss */
+/* line 380, ../sass/screen.scss */
 body .modalDialog .new-box .insertsummary {
   position: absolute;
   top: 155px;
   left: 100px;
 }
-/* line 369, ../sass/screen.scss */
+/* line 383, ../sass/screen.scss */
 body .modalDialog .new-box .tagsvalue {
   position: absolute;
   top: 523px;
   left: 199px;
 }
-/* line 372, ../sass/screen.scss */
+/* line 386, ../sass/screen.scss */
 body .modalDialog .new-box .insertid {
   position: absolute;
   top: 35px;
   left: 100px;
 }
-/* line 376, ../sass/screen.scss */
+/* line 390, ../sass/screen.scss */
 body .modalDialog .readnew-box {
   width: 700px;
   height: 720px;
@@ -519,78 +538,94 @@ body .modalDialog .readnew-box {
   border-radius: 10px;
   background: #fff;
 }
-/* line 383, ../sass/screen.scss */
+/* line 397, ../sass/screen.scss */
 body .modalDialog .readnew-box .readtitle {
   margin: 10px 0;
 }
-/* line 386, ../sass/screen.scss */
+/* line 400, ../sass/screen.scss */
 body .modalDialog .readnew-box .readimage {
   margin-left: 65px;
 }
-/* line 389, ../sass/screen.scss */
+/* line 403, ../sass/screen.scss */
 body .modalDialog .readnew-box .newtitle {
   position: absolute;
   top: 0px;
   left: 40px;
 }
-/* line 392, ../sass/screen.scss */
+/* line 406, ../sass/screen.scss */
 body .modalDialog .readnew-box .newcontent {
   position: absolute;
   top: 80px;
   left: 15px;
 }
-/* line 395, ../sass/screen.scss */
+/* line 409, ../sass/screen.scss */
 body .modalDialog .readnew-box .newauthor {
   position: absolute;
   bottom: 38px;
   left: 15px;
   font-style: italic;
 }
-/* line 399, ../sass/screen.scss */
+/* line 413, ../sass/screen.scss */
 body .modalDialog .readnew-box .newdate {
   position: absolute;
   bottom: 10px;
   left: 15px;
 }
-/* line 402, ../sass/screen.scss */
+/* line 416, ../sass/screen.scss */
 body .modalDialog .readnew-box .newtags {
   position: absolute;
   bottom: 65px;
   left: 15px;
   font-style: italic;
 }
-/* line 408, ../sass/screen.scss */
+/* line 422, ../sass/screen.scss */
 body footer {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 2;
 }
-/* line 411, ../sass/screen.scss */
+/* line 426, ../sass/screen.scss */
 body footer div {
   margin-left: 20px;
   padding-top: 0px;
   width: 320px;
   display: inline-block;
 }
-/* line 417, ../sass/screen.scss */
+/* line 432, ../sass/screen.scss */
+body footer div p a {
+  text-decoration: none;
+  color: #7c88ce;
+}
+/* line 435, ../sass/screen.scss */
+body footer div p a:hover {
+  text-decoration: underline;
+}
+/* line 441, ../sass/screen.scss */
 body footer span {
   padding-left: 20px;
+  font-style: italic;
 }
-/* line 420, ../sass/screen.scss */
+/* line 445, ../sass/screen.scss */
 body footer .icons {
   width: 200px;
   margin-right: 20px;
   float: right;
 }
-/* line 425, ../sass/screen.scss */
+/* line 449, ../sass/screen.scss */
+body footer .icons a {
+  outline: none;
+}
+/* line 451, ../sass/screen.scss */
 body footer .icons a .fa {
   font-size: 40px;
   color: #7c88ce;
   padding: 10px 5px 10px 0px;
   transition: all 1s linear;
+  outline: none;
 }
-/* line 430, ../sass/screen.scss */
+/* line 457, ../sass/screen.scss */
 body footer .icons a .fa:hover {
   color: #555555;
   transform: rotateZ(359deg);

@@ -29,11 +29,13 @@ export default class DomService {
 
             const domString =
                 `<li data-id="${item.id}">` +
-                    '<div>' +
-                        `<img src="${linkImage}" alt="Here must be image">` +
-                    '</div>' +
-                    `<h2>${item.title}</h2>` +
-                    `<p>${item.summary}</p>` +
+                    `<a href="#readnew" class="link" data-id="${item.id}">` +
+                        `<div data-id="${item.id}">` +
+                            `<img src="${linkImage}" alt="Here must be image">` +
+                        '</div>' +
+                        `<h2>${item.title}</h2>` +
+                        `<p>${item.summary}</p>` +
+                    '</a>' +    
                     `<span class="datearticle">${date}</span>` +
                     `<span class="authorclass">${author}</span>` +
                     `<span class="settags">${tags}</span>` +
@@ -60,28 +62,43 @@ export default class DomService {
     }
 
     readNew() {
-        if (event.target.innerHTML !== 'Read') {
-           return;
+        if (event.target.innerHTML === 'Read' ||
+            event.target.tagName === 'IMG' ||
+            event.target.tagName === 'P' ||
+            event.target.tagName === 'H2') {
+ 
+        
+            const articleNode = event.target.parentElement;
+            const id = articleNode.getAttribute('data-id');
+
+            const article = articlesService.getArticle(id);
+
+            const h2 = document.getElementsByClassName('readtitle')[0];
+            const p = document.getElementsByClassName('readcontent')[0];
+            const author = document.getElementsByClassName('newauthor')[0];
+            const date = document.getElementsByClassName('newdate')[0];
+            const tags = document.getElementsByClassName('newtags')[0];
+            const img = document.getElementsByClassName('readimage')[0];
+
+            h2.innerHTML = article.title;
+            const link = articlesService.getImage(id);
+            link ? img.src = link.image : img.style.display = 'none';
+            p.innerHTML = article.content;
+            author.innerHTML = '<strong>' + 'Author:  ' + '</strong>' + article.author;
+
+            const options = {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+                timezone: 'UTC',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            date.innerHTML = '<strong>' + 'Date:  ' + '</strong>' + article.createdAt.toLocaleString("en-US", options);
+            tags.innerHTML = '<strong>' + 'Tags:  ' + '</strong>' + article.tags.join(',');
         }
-        const articleNode = event.target.parentElement;
-        const id = articleNode.getAttribute('data-id');
-
-        const article = articlesService.getArticle(id);
-
-        const h2 = document.getElementsByClassName('readtitle')[0];
-        const p = document.getElementsByClassName('readcontent')[0];
-        const author = document.getElementsByClassName('newauthor')[0];
-        const date = document.getElementsByClassName('newdate')[0];
-        const tags = document.getElementsByClassName('newtags')[0];
-        const img = document.getElementsByClassName('readimage')[0];
-
-        h2.innerHTML = article.title;
-        const link = articlesService.getImage(id);
-        link ? img.src = link.image : img.style.display = 'none';
-        p.innerHTML = article.content;
-        author.innerHTML = 'Author: ' + article.author;
-        date.innerHTML = article.createdAt;
-        tags.innerHTML = 'Tags: ' + article.tags.join(',');
     }
 
     showEditNew() {
