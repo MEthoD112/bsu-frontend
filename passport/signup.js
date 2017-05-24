@@ -18,8 +18,7 @@ module.exports = (passport) => {
                     }
                     // already exists
                     if (user) {
-                        console.log('User already exists with username: ' + username);
-                        return done(null, false, req.flash('message', 'User Already Exists'));
+                        return done(null, false, req.flash('message', 'You Entered Invalid Credentials'));
                     } else {
                         // if there is no user with that email
                         // create the user
@@ -32,10 +31,8 @@ module.exports = (passport) => {
                         // save the user
                         newUser.save((err) => {
                             if (err) {
-                                console.log('Error in Saving user: ' + err);
                                 throw err;
                             }
-                            console.log('User Registration succesful');
                             return done(null, newUser);
                         });
                     }
