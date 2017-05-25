@@ -13,11 +13,13 @@
 </head>
 <body>
     <header class="clearfix">
-        <img width="180" height="90" src="img/logo.png" alt="here must be a image">
+        <a href="/user">
+            <img width="180" height="90" src="img/logo.png" alt="here must be a image">
+        </a>
         <% if (user) { %>
-            <a href="/logout">LogOut</a>
+            <a href="/logout" class="sign">LogOut</a>
         <% } %>
-        <a id="signup" href="/login"><%= user.username %></a>
+        <a id="signup" href="/login" class="sign"><%= user.username %></a>
         <p>“I cannot tell a lie.” —George Washington </p>
         <hr>
     </header>
@@ -140,13 +142,15 @@
     </div>
     <footer>
         <hr>
-        <img width="180" height="90" src="img/logo.png" alt="here must be a image">
+        <a href="/user">
+            <img width="180" height="90" src="img/logo.png" alt="here must be a image">
+        </a>
         <div>
             <p>email: <a href="mailto:mileshko.vitaly@gmail.com">mileshko.vitaly@gmail.com</a></p>
             <p>mobile: <a href="tel:+375297777682">+375297777682</a></p>
         </div>
         <span>&copy; Vitaliy Mileshko.</span>
-        <span id="date">Date</span>
+        <span id="date"></span>
         <div class="icons">
                 <a class="icons__link" target="_blank" href="http://www.facebook.com"><i class="fa fa-facebook-official"></i></a>
                 <a class="icons__link" target="_blank" href="http://www.vk.com"><i class="fa fa-vk"></i></a>

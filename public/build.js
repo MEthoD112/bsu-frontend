@@ -1388,13 +1388,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Clock = function () {
-    function Clock(hours, minutes, seconds) {
+    function Clock() {
         _classCallCheck(this, Clock);
-
-        hours < 10 ? this.hours = '0' + hours : this.hours = hours;
-        minutes < 10 ? this.minutes = '0' + minutes : this.minutes = minutes;
-        seconds < 10 ? this.seconds = '0' + seconds : this.seconds = seconds;
-        this.now = this.hours + ':' + this.minutes + ':' + this.seconds;
     }
 
     _createClass(Clock, [{
@@ -1402,8 +1397,16 @@ var Clock = function () {
         value: function update() {
             var clock = new Clock(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds());
             var dateElement = document.getElementById('date');
-            dateElement.innerHTML = clock.now;
-
+            var options = {
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long',
+                hour: 'numeric',
+                minute: 'numeric',
+                second: 'numeric'
+            };
+            var date = new Date().toLocaleString("en-US", options);
+            dateElement.innerHTML = date;
             return setTimeout(clock.update, 1000);
         }
     }]);

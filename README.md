@@ -1,5 +1,7 @@
 Responsive Collective News Portal
 
+https://newsp0rtal.herokuapp.com
+
 ### Tech stack:
 
  * Webpack
@@ -11,4 +13,4 @@ Responsive Collective News Portal
  * Express
  * Passport
  * Express-session
- * MongoDB (Online version MongoLab.com)
+ * MongoDB (Online version mlab.com)

@@ -24,7 +24,7 @@
   "bugs": {
     "url": "https://github.com/MEthoD112/bsu-frontend/issues"
   },
-  "homepage": "https://github.com/MEthoD112/bsu-frontend#readme",
+  "homepage": "https://newsp0rtal.herokuapp.com",
   "dependencies": {
     "bcrypt-nodejs": "*",
     "body-parser": "^1.17.1",
@@ -52,7 +52,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-react": "^6.9.0",
     "eslint-plugin-standard": "^2.1.1",
     "webpack": "^2.5.1"
   },
@@ -60,6 +59,5 @@
     "eslint": "^3.18.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^6.10.3"
   }
 }

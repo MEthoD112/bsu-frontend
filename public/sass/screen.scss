@@ -39,11 +39,13 @@ body {
     color: #333333;
     header {
         width: 100%;
-        img {
-            padding: 20px 0px 20px 20px;
-            float: left;
-        }
         a {
+            img {
+                padding: 20px 0px 20px 20px;
+                float: left;
+            }
+        }
+        .sign  {
             float: right;
             color: #ffffff;
             background: #7c88ce;
@@ -51,6 +53,7 @@ body {
             margin: 40px 20px 20px 0px;
             padding: 5px 7px;
             text-decoration: none;
+            outline: none;
             &:hover {
                 color: #7c88ce;
                 background: #ffffff;

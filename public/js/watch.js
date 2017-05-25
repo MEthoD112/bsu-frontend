@@ -1,16 +1,20 @@
 export default class Clock {
-    constructor(hours, minutes, seconds) {
-        hours < 10 ? this.hours = `0${hours}` : this.hours = hours;
-        minutes < 10 ? this.minutes = `0${minutes}` : this.minutes = minutes;
-        seconds < 10 ? this.seconds = `0${seconds}` : this.seconds = seconds;
-        this.now = `${this.hours}:${this.minutes}:${this.seconds}`;
+    constructor() {
     }
 
     update() {
         const clock = new Clock(new Date().getHours(), new Date().getMinutes(), new Date().getSeconds());
         const dateElement = document.getElementById('date');
-        dateElement.innerHTML = clock.now;
-
+        const options = {
+            month: 'long',
+            day: 'numeric',
+            weekday: 'long',
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric'
+        };
+        const date = new Date().toLocaleString("en-US", options);
+        dateElement.innerHTML = date;
         return setTimeout(clock.update, 1000);
     }
 }
